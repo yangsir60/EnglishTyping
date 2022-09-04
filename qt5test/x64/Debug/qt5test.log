@@ -1,0 +1,10 @@
+﻿生成启动时间为 2022/9/4 17:54:55。
+     1>项目“D:\Administrator\Project\qt5test\qt5test\qt5test.vcxproj”在节点 2 上(Build 个目标)。
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_qt5test.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_qt5test.cpp, GeneratedFiles\Release\moc_qt5test.cpp.
+     1>Link:
+         qt5test.vcxproj -> D:\Administrator\Project\qt5test\x64\Debug\qt5test.exe
+     1>已完成生成项目“D:\Administrator\Project\qt5test\qt5test\qt5test.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.03
