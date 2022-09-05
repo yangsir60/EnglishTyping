@@ -43,7 +43,7 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 
 EnglishTyping::~EnglishTyping()
 {
-
+	printLog();
 }
 
 void EnglishTyping::buildConnectWay()
@@ -296,4 +296,14 @@ void EnglishTyping::socket_read(int index)
 	m_tcpClient->connectToHost(QHostAddress("127.0.0.1"), 12345);
 	m_tcpClient->write(buff);
 	//QApplication::processEvents();
+}
+
+void EnglishTyping::printLog()
+{
+	UtilsFiles filetools;
+	QString logPath = filetools.getApplicationPath()+"/log";
+	if (!filetools.dirExists(logPath)){
+		filetools.mkPath(logPath);
+	}
+
 }

@@ -48,6 +48,8 @@ public:
 	QNetworkAccessManager *manager = new QNetworkAccessManager(this);
 	void socket_read(int index);
 	QLabel showFileName;
+	void printLog();
+	
 
 private:
 	Ui::EnglishTypingClass ui;
