@@ -1,0 +1,27 @@
+﻿生成启动时间为 2022/8/31 23:07:45。
+     1>项目“D:\Projects\EnglishTyping\EnglishTyping\EnglishTyping\EnglishTyping.vcxproj”在节点 2 上(Build 个目标)。
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_englishtyping.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_englishtyping.cpp, GeneratedFiles\Release\moc_englishtyping.cpp.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_Translator.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_Translator.cpp, GeneratedFiles\Release\moc_Translator.cpp.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_utilsfiles.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_utilsfiles.cpp, GeneratedFiles\Release\moc_utilsfiles.cpp.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_utilsinifile.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_utilsinifile.cpp, GeneratedFiles\Release\moc_utilsinifile.cpp.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I.\GeneratedFiles /I. /ID:\program\qt5.9.0\5.9\msvc2013_64\include /I.\GeneratedFiles\Debug /ID:\program\qt5.9.0\5.9\msvc2013_64\include\QtCore /ID:\program\qt5.9.0\5.9\msvc2013_64\include\QtGui /ID:\program\qt5.9.0\5.9\msvc2013_64\include\QtWidgets /ID:\program\qt5.9.0\5.9\msvc2013_64\include\QtNetwork /ID:\program\qt5.9.0\5.9\msvc2013_64\include\QtConcurrent /Zi /nologo /W1 /WX- /Od /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_CORE_LIB /D QT_GUI_LIB /D QT_WIDGETS_LIB /D QT_NETWORK_LIB /D QT_CONCURRENT_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt englishtyping.cpp
+         englishtyping.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Projects\EnglishTyping\EnglishTyping\x64\Debug\\EnglishTyping.exe" /NOLOGO /LIBPATH:D:\program\qt5.9.0\5.9\msvc2013_64\lib qtmaind.lib Qt5Cored.lib Qt5Guid.lib Qt5Widgetsd.lib Qt5Networkd.lib Qt5Concurrentd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Projects\EnglishTyping\EnglishTyping\x64\Debug\EnglishTyping.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Projects\EnglishTyping\EnglishTyping\x64\Debug\EnglishTyping.lib" /MACHINE:X64 x64\Debug\englishtyping.obj
+         x64\Debug\moc_englishtyping.obj
+         x64\Debug\moc_Translator.obj
+         x64\Debug\moc_utilsfiles.obj
+         x64\Debug\moc_utilsinifile.obj
+         x64\Debug\qrc_englishtyping.obj
+         x64\Debug\main.obj
+         x64\Debug\MD5.obj
+         x64\Debug\Translator.obj
+         x64\Debug\utilsfiles.obj
+         x64\Debug\utilsinifile.obj
+         EnglishTyping.vcxproj -> D:\Projects\EnglishTyping\EnglishTyping\x64\Debug\EnglishTyping.exe
+     1>已完成生成项目“D:\Projects\EnglishTyping\EnglishTyping\EnglishTyping\EnglishTyping.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.50

@@ -1,0 +1,27 @@
+﻿生成启动时间为 2022/9/3 22:05:00。
+     1>项目“D:\Projects\EnglishTyping\EnglishTyping\EnglishTyping\EnglishTyping.vcxproj”在节点 2 上(Build 个目标)。
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_englishtyping.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_englishtyping.cpp, GeneratedFiles\Release\moc_englishtyping.cpp.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_Translator.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_Translator.cpp, GeneratedFiles\Release\moc_Translator.cpp.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_utilsfiles.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_utilsfiles.cpp, GeneratedFiles\Release\moc_utilsfiles.cpp.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_utilsinifile.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_utilsinifile.cpp, GeneratedFiles\Release\moc_utilsinifile.cpp.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I.\GeneratedFiles /I. /ID:\program\qt5.9.0\5.9\msvc2013_64\include /I.\GeneratedFiles\Release /ID:\program\qt5.9.0\5.9\msvc2013_64\include\QtCore /ID:\program\qt5.9.0\5.9\msvc2013_64\include\QtGui /ID:\program\qt5.9.0\5.9\msvc2013_64\include\QtWidgets /ID:\program\qt5.9.0\5.9\msvc2013_64\include\QtNetwork /ID:\program\qt5.9.0\5.9\msvc2013_64\include\QtConcurrent /ID:\program\qt5.9.0\5.9\msvc2013_64\include\QtWebSockets /ID:\program\qt5.9.0\5.9\msvc2013_64\include\QtPrintSupport /ID:\program\qt5.9.0\5.9\msvc2013_64\include\QtMultimediaWidgets /nologo /W1 /WX- /O2 /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_NO_DEBUG /D NDEBUG /D QT_CORE_LIB /D QT_GUI_LIB /D QT_WIDGETS_LIB /D QT_NETWORK_LIB /D QT_CONCURRENT_LIB /D QT_WEBSOCKETS_LIB /D QT_PRINTSUPPORT_LIB /D QT_MULTIMEDIAWIDGETS_LIB /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TP /errorReport:prompt main.cpp
+         main.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Projects\EnglishTyping\EnglishTyping\x64\Release\\EnglishTyping.exe" /NOLOGO /LIBPATH:D:\program\qt5.9.0\5.9\msvc2013_64\lib qtmain.lib Qt5Core.lib Qt5Gui.lib Qt5Widgets.lib Qt5Network.lib Qt5Concurrent.lib Qt5Networkd.lib Qt5WebSockets.lib Qt5PrintSupport.lib Qt5MultimediaWidgets.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Projects\EnglishTyping\EnglishTyping\x64\Release\EnglishTyping.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Projects\EnglishTyping\EnglishTyping\x64\Release\EnglishTyping.lib" /MACHINE:X64 x64\Release\englishtyping.obj
+         x64\Release\qrc_englishtyping.obj
+         x64\Release\moc_englishtyping.obj
+         x64\Release\moc_Translator.obj
+         x64\Release\moc_utilsfiles.obj
+         x64\Release\moc_utilsinifile.obj
+         x64\Release\main.obj
+         x64\Release\MD5.obj
+         x64\Release\Translator.obj
+         x64\Release\utilsfiles.obj
+         x64\Release\utilsinifile.obj
+         EnglishTyping.vcxproj -> D:\Projects\EnglishTyping\EnglishTyping\x64\Release\EnglishTyping.exe
+     1>已完成生成项目“D:\Projects\EnglishTyping\EnglishTyping\EnglishTyping\EnglishTyping.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.90
