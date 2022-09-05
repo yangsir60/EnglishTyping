@@ -1,0 +1,16 @@
+cost_time: 4.36362m21s
+1. characteristic , 4/4            , characteristic adj.特有的、典型的 n.特征
+2. claim , 3/1            , claim vt./n.声称、断言；索取
+3. comment , 3/3            , comment n.评论、意见 vi.评论
+4. constitute , 3/6            , constitute vt.组成；设立
+5. contract , 3/3            , contract v.订（约；缩小 n.合同、包工
+6. creative , 3/3            , creative adj.创造（性的、有创造力的
+7. culture , 3/1            , culture n.教养、教育；文化；培植、培养
+8. historical , 3/3            , historical adj.历史（上的、史学的
+9. interpret , 3/3            , interpret vt.解释、说明、诠释 vi.口译、翻译
+10. manner , 3/3            , manner n.方式、方法；态度、举止；风度、礼貌、规矩
+11. mass , 3/2            , mass n.大量；团、块；（pl.群众；质量
+12. obtain , 3/1            , obtain vt.获得 vi.通用、流行
+13. powerful , 3/3            , powerful adj.强大的、有力的；强壮的
+14. predict , 3/0            , predict vt.预告、预言、预测
+15. risk , 3/1            , risk n.风险、危险；冒险 vt.冒…的危险

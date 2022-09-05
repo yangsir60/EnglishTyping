@@ -309,14 +309,21 @@ void EnglishTyping::printLog()
 	}
 	QDateTime current_date_time = QDateTime::currentDateTime();
 	QString current_time_str = current_date_time.toString("yyyy-MM-dd hh-mm-ss");
-	QString log_name = logPath + "/" + current_time_str + ".txt";
+	QString log_name = logPath + "/" + current_time_str + " "+showFileName.text() + ".txt";
 	if (!filetools.fileExists(log_name)){
 		QFile mfile(log_name);
 		if (!mfile.open(QIODevice::Append | QIODevice::Text)){
 			return;
 		}
 		QTextStream out(&mfile);
-		out << "cost_time: " << cost_time <<"s"<< endl;
+		if (cost_time > 60){
+			double ss = int(cost_time) % 60;
+			double mm = cost_time / 60;
+			out << "cost_time: " << mm<<"m"<<ss << "s" << endl;
+		}
+		else{
+			out << "cost_time: " << cost_time << "s" << endl;
+		}
 		for (int i = 0; i < mWordList.size();i++)
 		{
 			out << i + 1 << ". " << mWordList[i].mWord << " , " << mWordList[i].rightn << "/" << mWordList[i].wrongn << "            , " << mWordList[i].chinese << endl;
