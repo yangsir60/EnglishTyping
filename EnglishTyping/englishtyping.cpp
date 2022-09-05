@@ -39,6 +39,7 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 	}
 	start001();
 	m_tcpClient = new QTcpSocket(this);
+	mtime.start();
 }
 
 EnglishTyping::~EnglishTyping()
@@ -300,10 +301,27 @@ void EnglishTyping::socket_read(int index)
 
 void EnglishTyping::printLog()
 {
+	double cost_time = mtime.elapsed() / 1000.0;
 	UtilsFiles filetools;
 	QString logPath = filetools.getApplicationPath()+"/log";
 	if (!filetools.dirExists(logPath)){
 		filetools.mkPath(logPath);
+	}
+	QDateTime current_date_time = QDateTime::currentDateTime();
+	QString current_time_str = current_date_time.toString("yyyy-MM-dd hh-mm-ss");
+	QString log_name = logPath + "/" + current_time_str + ".txt";
+	if (!filetools.fileExists(log_name)){
+		QFile mfile(log_name);
+		if (!mfile.open(QIODevice::Append | QIODevice::Text)){
+			return;
+		}
+		QTextStream out(&mfile);
+		out << "cost_time: " << cost_time <<"s"<< endl;
+		for (int i = 0; i < mWordList.size();i++)
+		{
+			out << i + 1 << ". " << mWordList[i].mWord << " , " << mWordList[i].rightn << "/" << mWordList[i].wrongn << "            , " << mWordList[i].chinese << endl;
+		}
+		mfile.close();
 	}
 
 }

@@ -1,0 +1,15 @@
+1, alter , 3/0            , alter vt.改变、变更
+2, appropriate , 2/1            , appropriate adj.适当的 vt.私占；拨款用
+3, boom , 2/0            , boom n.叫喊声；繁荣 vi.隆隆作响；迅速增长
+4, combine , 2/1            , combine v.联合、化合 n.联合企业
+5, corporation , 2/1            , corporation n.公司、团体
+6, enterprise , 2/0            , enterprise n.进取心、事业心；（企事业单位
+7, federal , 2/1            , federal adj.联邦的
+8, gas , 2/0            , gas n.煤气；气体；汽油
+9, intend , 2/1            , intend vt.想要、打算、企图
+10, investment , 2/1            , investment n.投资（额
+11, opportunity , 2/1            , opportunity n.时机、机会
+12, personality , 2/1            , personality n.人格、个性；人物
+13, private , 2/0            , private adj.私人的；秘密的
+14, reasonable , 2/0            , reasonable adj.合理的；通情达理的；公道的；尚好的
+15, responsibility , 2/0            , responsibility n.责任（心；职责、义务

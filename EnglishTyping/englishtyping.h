@@ -49,6 +49,7 @@ public:
 	void socket_read(int index);
 	QLabel showFileName;
 	void printLog();
+	QTime mtime;
 	
 
 private:
