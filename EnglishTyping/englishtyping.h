@@ -47,6 +47,7 @@ public:
 	QNetworkRequest request;
 	QNetworkAccessManager *manager = new QNetworkAccessManager(this);
 	void socket_read(int index);
+	QLabel showFileName;
 
 private:
 	Ui::EnglishTypingClass ui;

@@ -21,9 +21,8 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 	ui.setupUi(this);
 	buildConnectWay();
 	
+	//隐藏提示面板;
 	ui.label->hide();
-	//mtransWay("English");
-	
 	
 	UtilsIniFile iniTools;
 	UtilsFiles fileTools;
@@ -72,6 +71,8 @@ void EnglishTyping::start001()
 {
 	if (read_01_path.size() == 0){
 		read_01_path = "D:\\BaiduNetdiskWorkspace\\Lite Code\\translate python\\20220604.json";
+		showFileName.setText(read_01_path.split("\\")[read_01_path.split("\\").length() - 1]);
+		ui.statusBar->addWidget(&showFileName);
 	}
 	QFile file(read_01_path);
 	bool isOpen = file.open(QIODevice::ReadOnly);
@@ -79,6 +80,9 @@ void EnglishTyping::start001()
 		return;
 	QByteArray data = file.readAll();
 	file.close();
+
+	
+	//读取json数据到结构体;
 	QJsonDocument doc = QJsonDocument::fromJson(data);
 	if (!doc.isObject())
 		return;
@@ -112,6 +116,10 @@ void EnglishTyping::chooseFileWay_M()
 {
 	QString fileName = QFileDialog::getOpenFileName(this,QString::fromLocal8Bit("导入"), "D:/BaiduNetdiskWorkspace/Lite Code/translate python", tr("json文件 (*.json)"));
 	read_01_path = fileName;
+	//显示读取的是什么文件;
+	fileName = fileName.split("/")[fileName.split("/").length() - 1];
+	showFileName.setText(fileName);
+	ui.statusBar->addWidget(&showFileName);
 	mWordList.clear();
 	start001();
 }
