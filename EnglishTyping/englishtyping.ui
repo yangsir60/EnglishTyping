@@ -147,6 +147,7 @@ padding-bottom:0px;</string>
      <string>菜单</string>
     </property>
     <addaction name="action_json"/>
+    <addaction name="action_csv"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -178,6 +179,11 @@ padding-bottom:0px;</string>
   <action name="action_2">
    <property name="text">
     <string>关于</string>
+   </property>
+  </action>
+  <action name="action_csv">
+   <property name="text">
+    <string>读取csv单词文件</string>
    </property>
   </action>
  </widget>

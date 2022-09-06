@@ -20,7 +20,7 @@ public:
 	QString JsonToQstring(QJsonObject jsonObject);
 	void buildConnectWay();
 	void moXie001();//开启001默写方法;
-	void start001();
+	void initWordList();
 	QString read_01_path;
 	struct MyWord
 	{
@@ -50,7 +50,7 @@ public:
 	QLabel showFileName;
 	void printLog();
 	QTime mtime;
-	
+	QString judge_read_way = "json";//判断读取文件是json还是csv;
 
 private:
 	Ui::EnglishTypingClass ui;
