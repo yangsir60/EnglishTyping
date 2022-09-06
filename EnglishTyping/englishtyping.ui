@@ -154,6 +154,8 @@ padding-bottom:0px;</string>
      <string>设置</string>
     </property>
     <addaction name="action"/>
+    <addaction name="action_showtime"/>
+    <addaction name="action_hidetime"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -184,6 +186,16 @@ padding-bottom:0px;</string>
   <action name="action_csv">
    <property name="text">
     <string>读取csv单词文件</string>
+   </property>
+  </action>
+  <action name="action_showtime">
+   <property name="text">
+    <string>显示时间</string>
+   </property>
+  </action>
+  <action name="action_hidetime">
+   <property name="text">
+    <string>隐藏时间</string>
    </property>
   </action>
  </widget>

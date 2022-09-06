@@ -20,8 +20,7 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 : QMainWindow(parent)
 {
 	ui.setupUi(this);
-	buildConnectWay();
-
+	mtimer = new QTimer(this);
 	//隐藏提示面板;
 	ui.label->hide();
 
@@ -37,10 +36,20 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 		mIsWebTrans = iniTools.getValue(configPath, "system", "isWeb", false).toBool();
 		mip = iniTools.getValue(configPath, "system", "mip", "").toString();
 		mport = iniTools.getValue(configPath, "system", "mport", "").toString();
+		isShowTime = iniTools.getValue(configPath, "system", "isShowTime", true).toBool();
 	}
 	initWordList();
 	m_tcpClient = new QTcpSocket(this);
 	mtime.start();
+
+	mtimer->start(1000);
+	mtimeRecorder.setHMS(0, 0, 0);
+	right_time_label.setText(mtimeRecorder.toString("hh:mm:ss"));
+	ui.statusBar->addWidget(&right_time_label);
+	if (!isShowTime){
+		right_time_label.hide();
+	}
+	buildConnectWay();
 }
 
 EnglishTyping::~EnglishTyping()
@@ -52,6 +61,9 @@ void EnglishTyping::buildConnectWay()
 {
 	connect(ui.action_json, SIGNAL(triggered()), this, SLOT(chooseFileWay_M()));
 	connect(ui.action_csv, SIGNAL(triggered()), this, SLOT(chooseFileWay_M()));
+	connect(ui.action_showtime, SIGNAL(triggered()), this, SLOT(changeTimeLabelState()));
+	connect(ui.action_hidetime, SIGNAL(triggered()), this, SLOT(changeTimeLabelState()));
+	connect(mtimer, SIGNAL(timeout()), this, SLOT(timeupdate()));
 	connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(parsingJson(QNetworkReply*)));
 }
 
@@ -125,6 +137,7 @@ void EnglishTyping::initWordList()
 	}
 	cout << "这里有 " << mWordList.size() << " 个单词" << endl;
 	connect(ui.english_sr, SIGNAL(returnPressed()), this, SLOT(saveEditInfo()), Qt::UniqueConnection);
+	mtimeRecorder.setHMS(0, 0, 0, 0);//每次打开一个文件从0开始计时;
 	moXie001();
 }
 
@@ -219,6 +232,23 @@ void EnglishTyping::parsingJson(QNetworkReply * reply)
 	}
 	else{
 		qDebug() << reply->errorString() << " error " << reply->error();
+	}
+}
+
+void EnglishTyping::timeupdate()
+{
+	mtimeRecorder = mtimeRecorder.addSecs(1);
+	right_time_label.setText(mtimeRecorder.toString("hh:mm:ss"));
+}
+
+void EnglishTyping::changeTimeLabelState()
+{
+	QObject *obj = sender();
+	if (obj->objectName() == "action_showtime"){
+		right_time_label.show();
+	}
+	else if (obj->objectName() == "action_hidetime"){
+		right_time_label.hide();
 	}
 }
 
@@ -347,10 +377,10 @@ void EnglishTyping::printLog()
 		if (cost_time > 60){
 			double ss = int(cost_time) % 60;
 			double mm = cost_time / 60;
-			out << "cost_time: " << mm << "m" << ss << "s" << endl;
+			out << "cost_time: " << int(mm) << "m" << ss << "s" << endl;
 		}
 		else{
-			out << "cost_time: " << cost_time << "s" << endl;
+			out << "cost_time: " << int(cost_time) << "s" << endl;
 		}
 		for (int i = 0; i < mWordList.size(); i++)
 		{

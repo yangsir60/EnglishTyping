@@ -10,6 +10,7 @@
 #include <utilsinifile.h>
 #include <utilsfiles.h>
 #include <QtNetwork/QtNetwork>
+#include <QTimer>
 class EnglishTyping : public QMainWindow
 {
 	Q_OBJECT
@@ -51,6 +52,10 @@ public:
 	void printLog();
 	QTime mtime;
 	QString judge_read_way = "json";//判断读取文件是json还是csv;
+	QTimer *mtimer;//一个定时器;
+	QTime mtimeRecorder;
+	QLabel right_time_label;//最右边用来计时的label;
+	bool isShowTime;
 
 private:
 	Ui::EnglishTypingClass ui;
@@ -59,6 +64,8 @@ public slots:
 	void chooseFileWay_M();
 	void saveEditInfo();
 	void parsingJson(QNetworkReply * reply);   //get请求完成后触发槽函数 
+	void timeupdate();
+	void changeTimeLabelState();
 };
 
 #endif // ENGLISHTYPING_H
