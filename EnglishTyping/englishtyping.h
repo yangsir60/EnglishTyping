@@ -11,6 +11,7 @@
 #include <utilsfiles.h>
 #include <QtNetwork/QtNetwork>
 #include <QTimer>
+#include <QTextToSpeech>
 class EnglishTyping : public QMainWindow
 {
 	Q_OBJECT
@@ -56,6 +57,9 @@ public:
 	QTime mtimeRecorder;
 	QLabel right_time_label;//最右边用来计时的label;
 	bool isShowTime;
+	bool isUseQtSpeech;
+	QTextToSpeech  *tts;
+	void qtSpeek(QString mtext);
 
 private:
 	Ui::EnglishTypingClass ui;

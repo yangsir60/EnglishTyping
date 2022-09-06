@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <QtConcurrent>
 #include <mtools.h>
+
 using namespace std;
 EnglishTyping::EnglishTyping(QWidget *parent)
 : QMainWindow(parent)
@@ -37,6 +38,7 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 		mip = iniTools.getValue(configPath, "system", "mip", "").toString();
 		mport = iniTools.getValue(configPath, "system", "mport", "").toString();
 		isShowTime = iniTools.getValue(configPath, "system", "isShowTime", true).toBool();
+		isUseQtSpeech = iniTools.getValue(configPath, "system", "isUseQtSpeech", false).toBool();
 	}
 	initWordList();
 	m_tcpClient = new QTcpSocket(this);
@@ -50,6 +52,11 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 		right_time_label.hide();
 	}
 	buildConnectWay();
+	tts = new QTextToSpeech(this);;
+	tts->setLocale(QLocale::Chinese);
+	tts->setRate(0.0);//ÓïËÙ;
+	tts->setPitch(1.0);//Òô¸ß;
+	tts->setVolume(1.0);//ÒôÁ¿;
 }
 
 EnglishTyping::~EnglishTyping()
@@ -184,10 +191,15 @@ void EnglishTyping::saveEditInfo()
 
 		ui.label->hide();
 		mWordList[nowIndex].rightn++;
-		if (mport.size() == 0)
-			QtConcurrent::run(this, &EnglishTyping::readThisWord, nowIndex);
+		if (isUseQtSpeech){
+			qtSpeek(mWordList[nowIndex].mWord);
+		}
 		else{
-			socket_read(nowIndex);
+			if (mport.size() == 0)
+				QtConcurrent::run(this, &EnglishTyping::readThisWord, nowIndex);
+			else{
+				socket_read(nowIndex);
+			}
 		}
 	}
 	else{
@@ -198,10 +210,15 @@ void EnglishTyping::saveEditInfo()
 		//qDebug() << ui.label->size()<<" "<<ui.label->margin();
 		mWordList[nowIndex].wrongn++;
 		wrongIndex = nowIndex;
-		if (mport.size() == 0)
-			QtConcurrent::run(this, &EnglishTyping::readThisWord, nowIndex);
+		if (isUseQtSpeech){
+			qtSpeek(mWordList[nowIndex].mWord);
+		}
 		else{
-			socket_read(nowIndex);
+			if (mport.size() == 0)
+				QtConcurrent::run(this, &EnglishTyping::readThisWord, nowIndex);
+			else{
+				socket_read(nowIndex);
+			}
 		}
 	}
 	qDebug() << mWordList[nowIndex].mWord << ", You write right " << mWordList[nowIndex].rightn << " wrong " << mWordList[nowIndex].wrongn;
@@ -389,4 +406,12 @@ void EnglishTyping::printLog()
 		mfile.close();
 	}
 
+}
+
+void EnglishTyping::qtSpeek(QString mtext)
+{
+	if (tts->state() == QTextToSpeech::Ready)
+	{
+			tts->say(mtext);
+	}
 }
