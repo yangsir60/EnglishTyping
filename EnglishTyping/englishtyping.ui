@@ -156,6 +156,8 @@ padding-bottom:0px;</string>
     <addaction name="action"/>
     <addaction name="action_showtime"/>
     <addaction name="action_hidetime"/>
+    <addaction name="actioncloseTips"/>
+    <addaction name="actionopenTips"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -196,6 +198,16 @@ padding-bottom:0px;</string>
   <action name="action_hidetime">
    <property name="text">
     <string>隐藏时间</string>
+   </property>
+  </action>
+  <action name="actioncloseTips">
+   <property name="text">
+    <string>closeTips</string>
+   </property>
+  </action>
+  <action name="actionopenTips">
+   <property name="text">
+    <string>openTips</string>
    </property>
   </action>
  </widget>

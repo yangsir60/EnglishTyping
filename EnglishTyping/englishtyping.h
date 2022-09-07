@@ -60,6 +60,7 @@ public:
 	bool isUseQtSpeech;
 	QTextToSpeech  *tts;
 	void qtSpeek(QString mtext);
+	bool isTips;
 
 private:
 	Ui::EnglishTypingClass ui;
@@ -70,6 +71,7 @@ public slots:
 	void parsingJson(QNetworkReply * reply);   //get请求完成后触发槽函数 
 	void timeupdate();
 	void changeTimeLabelState();
+	void changeTipsState();
 };
 
 #endif // ENGLISHTYPING_H

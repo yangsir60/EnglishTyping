@@ -39,6 +39,7 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 		mport = iniTools.getValue(configPath, "system", "mport", "").toString();
 		isShowTime = iniTools.getValue(configPath, "system", "isShowTime", true).toBool();
 		isUseQtSpeech = iniTools.getValue(configPath, "system", "isUseQtSpeech", false).toBool();
+		isTips = iniTools.getValue(configPath, "system", "isTips", false).toBool();
 	}
 	initWordList();
 	m_tcpClient = new QTcpSocket(this);
@@ -70,6 +71,8 @@ void EnglishTyping::buildConnectWay()
 	connect(ui.action_csv, SIGNAL(triggered()), this, SLOT(chooseFileWay_M()));
 	connect(ui.action_showtime, SIGNAL(triggered()), this, SLOT(changeTimeLabelState()));
 	connect(ui.action_hidetime, SIGNAL(triggered()), this, SLOT(changeTimeLabelState()));
+	connect(ui.actioncloseTips, SIGNAL(triggered()), this, SLOT(changeTipsState()));
+	connect(ui.actionopenTips, SIGNAL(triggered()), this, SLOT(changeTipsState()));
 	connect(mtimer, SIGNAL(timeout()), this, SLOT(timeupdate()));
 	connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(parsingJson(QNetworkReply*)));
 }
@@ -206,8 +209,12 @@ void EnglishTyping::saveEditInfo()
 		ui.tips->setText("Wrong");
 		ui.tips->setStyleSheet("color: rgb(255, 0, 0);font: 18pt Microsoft YaHei;");
 		ui.label->setText(mWordList[nowIndex].mWord);
-		ui.label->hide();
-		//qDebug() << ui.label->size()<<" "<<ui.label->margin();
+		if (isTips){
+			ui.label->show();
+		}
+		else{
+			ui.label->hide();
+		}
 		mWordList[nowIndex].wrongn++;
 		wrongIndex = nowIndex;
 		if (isUseQtSpeech){
@@ -266,6 +273,17 @@ void EnglishTyping::changeTimeLabelState()
 	}
 	else if (obj->objectName() == "action_hidetime"){
 		right_time_label.hide();
+	}
+}
+
+void EnglishTyping::changeTipsState()
+{
+	QObject *obj = sender();
+	if (obj->objectName() == "actionopenTips"){
+		isTips = true;
+	}
+	else if (obj->objectName() == "actioncloseTips"){
+		isTips = false;
 	}
 }
 
