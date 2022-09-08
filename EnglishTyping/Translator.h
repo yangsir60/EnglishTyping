@@ -39,9 +39,8 @@ public:
 	QString GetUrl();   //生产url的方法
 	void SetQstr(const QString &);   //设置需要翻译内容的函数
 	void SetIndex(const int&);      //设置翻译目标语种的函数
-
-
-
+	void SetAppid(string mappid){ appid = mappid;};
+	void SetKey(string mkey){ secret_key = mkey; };
 };
 
 #endif // TANSLATOR_H

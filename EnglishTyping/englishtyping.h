@@ -11,6 +11,7 @@
 #include <utilsfiles.h>
 #include <QtNetwork/QtNetwork>
 #include <QTimer>
+#include <Translator.h>
 #include <QTextToSpeech>
 class EnglishTyping : public QMainWindow
 {
@@ -61,6 +62,7 @@ public:
 	QTextToSpeech  *tts;
 	void qtSpeek(QString mtext);
 	bool isTips;
+	Translator translator;
 
 private:
 	Ui::EnglishTypingClass ui;

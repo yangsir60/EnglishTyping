@@ -7,7 +7,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
-#include <Translator.h>
 #include <QNetworkRequest>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -15,7 +14,6 @@
 #include <stdlib.h>
 #include <QtConcurrent>
 #include <mtools.h>
-
 using namespace std;
 EnglishTyping::EnglishTyping(QWidget *parent)
 : QMainWindow(parent)
@@ -40,6 +38,10 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 		isShowTime = iniTools.getValue(configPath, "system", "isShowTime", true).toBool();
 		isUseQtSpeech = iniTools.getValue(configPath, "system", "isUseQtSpeech", false).toBool();
 		isTips = iniTools.getValue(configPath, "system", "isTips", false).toBool();
+		std::string appid = iniTools.getValue(configPath, "trans", "appid", "").toString().toStdString();
+		std::string key = iniTools.getValue(configPath, "trans", "key", "").toString().toStdString();
+		translator.SetAppid(appid);
+		translator.SetKey(key);
 	}
 	initWordList();
 	m_tcpClient = new QTcpSocket(this);
@@ -130,7 +132,7 @@ void EnglishTyping::initWordList()
 		}
 		QTextStream * out = new QTextStream(&file);//文本流  ;
 		QStringList tempOption = out->readAll().split("\n");//每行以\n区分 ;
-		for (int i = 0; i < tempOption.count()-1; i++)
+		for (int i = 0; i < tempOption.count() - 1; i++)
 		{
 			QStringList tempbar = tempOption.at(i).split(",");//一行中的单元格以，区分;  
 
@@ -369,7 +371,6 @@ string EnglishTyping::exe_cmd(const char *cmd)
 void EnglishTyping::mtransWay(QString eworld)
 {
 	//English word to chinese;
-	Translator translator;
 	translator.SetQstr(eworld);
 	translator.SetIndex(1);
 	QString url = translator.GetUrl();
@@ -430,6 +431,6 @@ void EnglishTyping::qtSpeek(QString mtext)
 {
 	if (tts->state() == QTextToSpeech::Ready)
 	{
-			tts->say(mtext);
+		tts->say(mtext);
 	}
 }
