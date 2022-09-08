@@ -165,6 +165,9 @@ QString EnglishTyping::JsonToQstring(QJsonObject jsonObject)
 
 void EnglishTyping::chooseFileWay_M()
 {
+	if (isSpellOnce()){
+		printLog();
+	}
 	QString fileName;
 	QObject* obj = sender();
 	if (obj->objectName() == "action_json"){
@@ -395,36 +398,59 @@ void EnglishTyping::socket_read(int index)
 
 void EnglishTyping::printLog()
 {
-	double cost_time = mtime.elapsed() / 1000.0;
-	UtilsFiles filetools;
-	QString logPath = filetools.getApplicationPath() + "/log";
-	if (!filetools.dirExists(logPath)){
-		filetools.mkPath(logPath);
-	}
-	QDateTime current_date_time = QDateTime::currentDateTime();
-	QString current_time_str = current_date_time.toString("yyyy-MM-dd hh-mm-ss");
-	QString log_name = logPath + "/" + current_time_str + " " + showFileName.text() + ".txt";
-	if (!filetools.fileExists(log_name)){
-		QFile mfile(log_name);
-		if (!mfile.open(QIODevice::Append | QIODevice::Text)){
-			return;
+	if (isSpellOnce()){
+		double cost_time = mtime.elapsed() / 1000.0;
+		UtilsFiles filetools;
+		QString logPath = filetools.getApplicationPath() + "/log";
+		if (!filetools.dirExists(logPath)){
+			filetools.mkPath(logPath);
 		}
-		QTextStream out(&mfile);
-		if (cost_time > 60){
-			double ss = int(cost_time) % 60;
-			double mm = cost_time / 60;
-			out << "cost_time: " << int(mm) << "m" << ss << "s" << endl;
+		QDateTime current_date_time = QDateTime::currentDateTime();
+		QString current_time_str = current_date_time.toString("yyyy-MM-dd hh-mm-ss");
+		QString log_name = logPath + "/" + showFileName.text() + ".txt";
+		if (!filetools.fileExists(log_name)){
+			QFile mfile(log_name);
+			if (!mfile.open(QIODevice::Append | QIODevice::Text)){
+				return;
+			}
+			QTextStream out(&mfile);
+			out << current_time_str << "    ";
+			if (cost_time > 60){
+				double ss = int(cost_time) % 60;
+				double mm = cost_time / 60;
+				out << "cost_time: " << int(mm) << "m" << ss << "s" << endl;
+			}
+			else{
+				out << "cost_time: " << int(cost_time) << "s" << endl;
+			}
+			for (int i = 0; i < mWordList.size(); i++)
+			{
+				out << i + 1 << ", " << mWordList[i].mWord << " , " << mWordList[i].rightn << "," << mWordList[i].wrongn << "            , " << mWordList[i].chinese << endl;
+			}
+			mfile.close();
 		}
 		else{
-			out << "cost_time: " << int(cost_time) << "s" << endl;
+			QFile mfile(log_name);
+			if (!mfile.open(QIODevice::Append | QIODevice::Text)){
+				return;
+			}
+			QTextStream out(&mfile);
+			out << current_time_str << "    ";
+			if (cost_time > 60){
+				double ss = int(cost_time) % 60;
+				double mm = cost_time / 60;
+				out << "cost_time: " << int(mm) << "m" << ss << "s" << endl;
+			}
+			else{
+				out << "cost_time: " << int(cost_time) << "s" << endl;
+			}
+			for (int i = 0; i < mWordList.size(); i++)
+			{
+				out << i + 1 << ", " << mWordList[i].mWord << " , " << mWordList[i].rightn << "," << mWordList[i].wrongn << "            , " << mWordList[i].chinese << endl;
+			}
+			mfile.close();
 		}
-		for (int i = 0; i < mWordList.size(); i++)
-		{
-			out << i + 1 << ". " << mWordList[i].mWord << " , " << mWordList[i].rightn << "/" << mWordList[i].wrongn << "            , " << mWordList[i].chinese << endl;
-		}
-		mfile.close();
 	}
-
 }
 
 void EnglishTyping::qtSpeek(QString mtext)
@@ -433,4 +459,13 @@ void EnglishTyping::qtSpeek(QString mtext)
 	{
 		tts->say(mtext);
 	}
+}
+
+bool EnglishTyping::isSpellOnce()
+{
+	for (int i = 0; i < mWordList.size(); i++){
+		if (mWordList[i].rightn == 0)
+			return false;
+	}
+	return true;
 }

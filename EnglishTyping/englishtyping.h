@@ -63,6 +63,7 @@ public:
 	void qtSpeek(QString mtext);
 	bool isTips;
 	Translator translator;
+	bool isSpellOnce();
 
 private:
 	Ui::EnglishTypingClass ui;
