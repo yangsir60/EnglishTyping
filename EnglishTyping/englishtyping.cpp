@@ -75,8 +75,18 @@ void EnglishTyping::buildConnectWay()
 	connect(ui.action_hidetime, SIGNAL(triggered()), this, SLOT(changeTimeLabelState()));
 	connect(ui.actioncloseTips, SIGNAL(triggered()), this, SLOT(changeTipsState()));
 	connect(ui.actionopenTips, SIGNAL(triggered()), this, SLOT(changeTipsState()));
+	connect(ui.action, SIGNAL(triggered()), this, SLOT(openIni()));
 	connect(mtimer, SIGNAL(timeout()), this, SLOT(timeupdate()));
 	connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(parsingJson(QNetworkReply*)));
+}
+
+void EnglishTyping::openIni(){
+	QProcess pro;
+	UtilsFiles fileTools;
+	QString configPath = fileTools.getApplicationPath() + "/config/config.ini";
+	QString iniPath = "notepad.exe " + configPath;
+	pro.start(iniPath);
+	pro.waitForFinished(-1);
 }
 
 void EnglishTyping::moXie001()
@@ -267,6 +277,7 @@ void EnglishTyping::parsingJson(QNetworkReply * reply)
 void EnglishTyping::timeupdate()
 {
 	mtimeRecorder = mtimeRecorder.addSecs(1);
+	//right_time_label.setText(mtimeRecorder.toString("hh:mm:ss"));
 	right_time_label.setText(mtimeRecorder.toString("hh:mm:ss"));
 }
 
@@ -418,10 +429,12 @@ void EnglishTyping::printLog()
 			if (cost_time > 60){
 				double ss = int(cost_time) % 60;
 				double mm = cost_time / 60;
-				out << "cost_time: " << int(mm) << "m" << ss << "s" << endl;
+				//out << "cost_time: " << int(mm) << "m" << ss << "s" << endl;
+				out << mtimeRecorder.toString("hh:mm:ss") << endl;
 			}
 			else{
-				out << "cost_time: " << int(cost_time) << "s" << endl;
+				//out << "cost_time: " << int(cost_time) << "s" << endl;
+				out << mtimeRecorder.toString("hh:mm:ss") << endl;
 			}
 			for (int i = 0; i < mWordList.size(); i++)
 			{

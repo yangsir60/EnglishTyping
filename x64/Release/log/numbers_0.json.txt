@@ -1,0 +1,16 @@
+2022-09-10 16-14-58    cost_time: 6m44s
+1, ability , 4,0            , ability n.能力、本领；才能、才智
+2, account , 3,0            , account n.账（目、账户；叙述、说明 vi.说明（原因等、（数量、比例方面占
+3, behavior , 3,0            , behavio(u)r n.行为、举止；运转情况
+4, create , 3,3            , create vt.创造、创建、创作；引起、产生
+5, decline , 3,0            , decline vi./n.下降、减少、衰退；婉拒
+6, economic , 3,1            , economic adj.经济（学的，经济上的
+7, economy , 3,2            , economy n.经济（制度、经济情况；节约、省俭
+8, growth , 3,0            , growth n.增加、增长（量；生长，发展
+9, hard , 3,0            , hard adj.硬的、坚固的；烈性的；困难的 ad.努力地；猛烈地；困难地
+10, individual , 3,0            , individual adj.单独的，个人的
+11, process , 3,0            , process n. 过程、工序、程序 vt. 加工、处理
+12, product , 3,0            , product n.产品、产物；乘积
+13, rate , 3,0            , rate n.（比率；速度、进度；价格、费用
+14, technology , 3,2            , technology n.工艺、技术
+15, theory , 3,0            , theory n.理论、原理；学说；看法、见解

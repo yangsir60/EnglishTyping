@@ -1,0 +1,16 @@
+2022-09-10 16-24-15    00:03:27
+1, advocate , 2,1            , advocate vt./n.鼓吹（者、拥护（者
+2, amount , 3,0            , amount n.数量 vi.合计；等同
+3, community , 3,3            , community n.团体、社会；界、族；社区；群落
+4, concern , 3,0            , concern vt.关联；关心 n.企业；焦虑；关心
+5, consequence , 3,5            , consequence n.结果、后果；重要（性、重大
+6, environment , 2,1            , environment n.环境、周围状况
+7, factor , 2,0            , factor n.因素、要素
+8, intelligence , 2,0            , intelligence n.智力、智慧；情报
+9, likely , 2,1            , likely adj.可能的、有希望的 ad.可能
+10, professional , 2,0            , professional adj.专业的；高水准的
+11, return , 2,0            , return v./n.回来；归还、送还；回答
+12, social , 2,0            , social adj.社会的；交际的
+13, spot , 2,0            , spot n.斑点、污点；地点；一点儿 vt.认出、发现；玷污
+14, tend , 2,0            , tend vi.倾向、趋向于 vt.照管、护理
+15, view , 2,1            , view n.眼界；风景；（常用 pl.看法 vt.看待；观察

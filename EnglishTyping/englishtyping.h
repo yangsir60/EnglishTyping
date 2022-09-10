@@ -65,6 +65,7 @@ public:
 	Translator translator;
 	bool isSpellOnce();
 
+
 private:
 	Ui::EnglishTypingClass ui;
 
@@ -75,6 +76,8 @@ public slots:
 	void timeupdate();
 	void changeTimeLabelState();
 	void changeTipsState();
+	void openIni();
+
 };
 
 #endif // ENGLISHTYPING_H

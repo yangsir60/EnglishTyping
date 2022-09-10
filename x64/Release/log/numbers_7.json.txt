@@ -1,0 +1,16 @@
+2022-09-10 16-40-32    00:15:43
+1, approach , 11,8            , approach v./n.接近 n.途径；方法
+2, argument , 11,12            , argument n.争论、辩论；论点、论据
+3, assume , 11,5            , assume vt.假定；承担；呈现
+4, blueprint , 10,5            , blueprint n.计划、蓝图
+5, climate , 10,4            , climate n.气候；风气、气氛
+6, competitive , 11,7            , competitive adj.（好竞争的；求胜心切的；有竞争力的
+7, complex , 11,2            , complex adj.复杂的；复合的 n.综合体
+8, concept , 11,6            , concept n.概念、观念、思想
+9, confuse , 11,5            , confuse vt.使困惑；混乱、混淆
+10, critical , 11,7            , critical adj.危急的、决定性的、关键性的；批评（判的
+11, crude , 11,10            , crude adj.天然的；生的；粗鲁的
+12, emerge , 11,10            , emerge vi.出现；发生、显露
+13, robot , 11,3            , robot n.机器人、自动机械
+14, shift , 11,8            , shift v.转移；改变，转变 n.转换；轮（或换班
+15, species , 11,11            , species n.种、类
