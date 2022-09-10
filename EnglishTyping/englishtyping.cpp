@@ -38,6 +38,7 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 		isShowTime = iniTools.getValue(configPath, "system", "isShowTime", true).toBool();
 		isUseQtSpeech = iniTools.getValue(configPath, "system", "isUseQtSpeech", false).toBool();
 		isTips = iniTools.getValue(configPath, "system", "isTips", false).toBool();
+		defautPath = iniTools.getValue(configPath, "system", "defautPath", "").toString();
 		std::string appid = iniTools.getValue(configPath, "trans", "appid", "").toString().toStdString();
 		std::string key = iniTools.getValue(configPath, "trans", "key", "").toString().toStdString();
 		translator.SetAppid(appid);
@@ -65,6 +66,7 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 EnglishTyping::~EnglishTyping()
 {
 	printLog();
+	writeDefautPathIni();
 }
 
 void EnglishTyping::buildConnectWay()
@@ -105,8 +107,9 @@ void EnglishTyping::moXie001()
 void EnglishTyping::initWordList()
 {
 	if (read_01_path.size() == 0){
-		read_01_path = "D:\\BaiduNetdiskWorkspace\\Lite Code\\translate python\\20220604.json";
-		showFileName.setText(read_01_path.split("\\")[read_01_path.split("\\").length() - 1]);
+		//read_01_path = "D:\\BaiduNetdiskWorkspace\\Lite Code\\translate python\\20220604.json";
+		read_01_path = defautPath;
+		showFileName.setText(read_01_path.split("/")[read_01_path.split("/").length() - 1]);
 		ui.statusBar->addWidget(&showFileName);
 	}
 	if (judge_read_way == "json")
@@ -481,4 +484,12 @@ bool EnglishTyping::isSpellOnce()
 			return false;
 	}
 	return true;
+}
+
+void EnglishTyping::writeDefautPathIni()
+{
+	UtilsFiles fileTools;
+	UtilsIniFile ini_tools;
+	QString configPath = fileTools.getApplicationPath() + "/config/config.ini";
+	ini_tools.setValue(configPath, "system", "defautPath", read_01_path);
 }

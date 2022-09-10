@@ -64,6 +64,8 @@ public:
 	bool isTips;
 	Translator translator;
 	bool isSpellOnce();
+	QString defautPath;//用来读取一打开时显示的单词;
+	void writeDefautPathIni();
 
 
 private:
