@@ -20,10 +20,6 @@ class EnglishTyping : public QMainWindow
 public:
 	EnglishTyping(QWidget *parent = 0);
 	~EnglishTyping();
-	QString JsonToQstring(QJsonObject jsonObject);
-	void buildConnectWay();
-	void moXie001();//开启001默写方法;
-	void initWordList();
 	QString read_01_path;
 	struct MyWord
 	{
@@ -34,46 +30,43 @@ public:
 	};
 	QVector<MyWord> mWordList;
 	QString editText;
-	int nowIndex=0;//用来索引mWordList;
-	QString unicodeToUtf8(QString);  //unicode转utf-8,用于处理返回数据
-	QString myregex(const QString &str);
+	int nowIndex = 0;//用来索引mWordList;
 	QString pythonPath;
 	QString pyPath;
-	void readThisWord(int index);
-	std::string exe_cmd(const char *cmd);
-	bool mIsWebTrans=false;
-	void mtransWay(QString eworld);
+	bool mIsWebTrans = false;
 	QString tempChineseLabel;
 	QString mip;//进程通讯用的ip地址;
 	QString mport;//进程通讯用的port号;
-	QTcpSocket *m_tcpClient;//用来进行进程通讯;
 	QNetworkRequest request;
 	QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-	void socket_read(int index);
 	QLabel showFileName;
-	void printLog();
 	QTime mtime;
 	QString judge_read_way = "json";//判断读取文件是json还是csv;
 	QTimer *mtimer;//一个定时器;
 	QTime mtimeRecorder;
 	QLabel right_time_label;//最右边用来计时的label;
-	bool isShowTime;
-	bool isUseQtSpeech;
 	QTextToSpeech  *tts;
-	void qtSpeek(QString mtext);
 	bool isTips;
 	Translator translator;
-	bool isSpellOnce();
 	QString defautPath;//用来读取一打开时显示的单词;
+	QString file_name_global;
+
 	void writeDefautPathIni();
-
-
+	QString unicodeToUtf8(QString);  //unicode转utf-8,用于处理返回数据
+	QString myregex(const QString &str);
+	void qtSpeek(QString mtext);
+	void printLog();
+	void mtransWay(QString eworld);
+	QString JsonToQstring(QJsonObject jsonObject);
+	void buildConnectWay();
+	void showChineseLabel();//开启001默写方法;
+	void initWordList();
 private:
 	Ui::EnglishTypingClass ui;
 
 public slots:
 	void chooseFileWay_M();
-	void saveEditInfo();
+	void JudgeTorF();
 	void parsingJson(QNetworkReply * reply);   //get请求完成后触发槽函数 
 	void timeupdate();
 	void changeTimeLabelState();

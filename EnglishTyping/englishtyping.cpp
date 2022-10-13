@@ -19,10 +19,9 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 : QMainWindow(parent)
 {
 	ui.setupUi(this);
-	mtimer = new QTimer(this);
 	//Òþ²ØÌáÊ¾Ãæ°å;
 	ui.label->hide();
-
+	//¶ÁÈ¡iniÎÄ¼þ;
 	UtilsIniFile iniTools;
 	UtilsFiles fileTools;
 	QString configPath = fileTools.getApplicationPath() + "/config/config.ini";
@@ -30,13 +29,9 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 		qDebug() << "> WARNING: config.ini is not Exists! Please create config.ini file";
 	}
 	else{
-		pythonPath = iniTools.getValue(configPath, "system", "pythonPath", "").toString();
-		pyPath = iniTools.getValue(configPath, "system", "pyPath", "").toString();
 		mIsWebTrans = iniTools.getValue(configPath, "system", "isWeb", false).toBool();
 		mip = iniTools.getValue(configPath, "system", "mip", "").toString();
 		mport = iniTools.getValue(configPath, "system", "mport", "").toString();
-		isShowTime = iniTools.getValue(configPath, "system", "isShowTime", true).toBool();
-		isUseQtSpeech = iniTools.getValue(configPath, "system", "isUseQtSpeech", false).toBool();
 		isTips = iniTools.getValue(configPath, "system", "isTips", false).toBool();
 		defautPath = iniTools.getValue(configPath, "system", "defautPath", "").toString();
 		std::string appid = iniTools.getValue(configPath, "trans", "appid", "").toString().toStdString();
@@ -44,18 +39,18 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 		translator.SetAppid(appid);
 		translator.SetKey(key);
 	}
+	//³õÊ¼»¯µ¥´ÊÁÐ±í;
 	initWordList();
-	m_tcpClient = new QTcpSocket(this);
+	//¿ªÆôÒ»¸ö¼ÆÊ±Æ÷;
+	mtimer = new QTimer(this);
 	mtime.start();
-
 	mtimer->start(1000);
 	mtimeRecorder.setHMS(0, 0, 0);
 	right_time_label.setText(mtimeRecorder.toString("hh:mm:ss"));
 	ui.statusBar->addWidget(&right_time_label);
-	if (!isShowTime){
-		right_time_label.hide();
-	}
+	//½¨Á¢Á¬½Ó;
 	buildConnectWay();
+	//ÉèÖÃÓïÒôÀÊ¶Á;
 	tts = new QTextToSpeech(this);;
 	tts->setLocale(QLocale::Chinese);
 	tts->setRate(0.0);//ÓïËÙ;
@@ -91,11 +86,11 @@ void EnglishTyping::openIni(){
 	pro.waitForFinished(-1);
 }
 
-void EnglishTyping::moXie001()
+void EnglishTyping::showChineseLabel()
 {
 	if (mWordList.size() != 0){
 		if (mIsWebTrans){
-			mtransWay(mWordList[nowIndex].mWord);
+			mtransWay(mWordList[nowIndex].mWord);//requestÇëÇóÍê±ÏºóparsingjsonÀïÃæ½øÐÐÁËlbchineseµÄÏÔÊ¾;
 		}
 		else{
 			ui.lb_chinese->setText(mWordList[nowIndex].chinese);
@@ -106,8 +101,8 @@ void EnglishTyping::moXie001()
 
 void EnglishTyping::initWordList()
 {
+	//ÔÚ´ò¿ªÊ±¶ÁÈ¡Ä¬ÈÏÂ·¾¶
 	if (read_01_path.size() == 0){
-		//read_01_path = "D:\\BaiduNetdiskWorkspace\\Lite Code\\translate python\\20220604.json";
 		read_01_path = defautPath;
 		showFileName.setText(read_01_path.split("/")[read_01_path.split("/").length() - 1]);
 		ui.statusBar->addWidget(&showFileName);
@@ -161,9 +156,9 @@ void EnglishTyping::initWordList()
 		file.close();
 	}
 	cout << "ÕâÀïÓÐ " << mWordList.size() << " ¸öµ¥´Ê" << endl;
-	connect(ui.english_sr, SIGNAL(returnPressed()), this, SLOT(saveEditInfo()), Qt::UniqueConnection);
-	mtimeRecorder.setHMS(0, 0, 0, 0);//Ã¿´Î´ò¿ªÒ»¸öÎÄ¼þ´Ó0¿ªÊ¼¼ÆÊ±;
-	moXie001();
+	connect(ui.english_sr, SIGNAL(returnPressed()), this, SLOT(JudgeTorF()), Qt::UniqueConnection);
+	//mtimeRecorder.setHMS(0, 0, 0, 0);//Ã¿´Î´ò¿ªÒ»¸öÎÄ¼þ´Ó0¿ªÊ¼¼ÆÊ±;
+	showChineseLabel();
 }
 
 QString EnglishTyping::JsonToQstring(QJsonObject jsonObject)
@@ -178,9 +173,6 @@ QString EnglishTyping::JsonToQstring(QJsonObject jsonObject)
 
 void EnglishTyping::chooseFileWay_M()
 {
-	if (isSpellOnce()){
-		printLog();
-	}
 	QString fileName;
 	QObject* obj = sender();
 	if (obj->objectName() == "action_json"){
@@ -194,34 +186,25 @@ void EnglishTyping::chooseFileWay_M()
 	read_01_path = fileName;
 	//ÔÚ½çÃæ×óÏÂ½ÇÏÔÊ¾¶ÁÈ¡µÄÊÇÊ²Ã´ÎÄ¼þ;
 	fileName = fileName.split("/")[fileName.split("/").length() - 1];
+	file_name_global = fileName;
 	showFileName.setText(fileName);
 	ui.statusBar->addWidget(&showFileName);
 	mWordList.clear();
 	initWordList();
 }
 
-void EnglishTyping::saveEditInfo()
+//ÅÐ¶ÏÊäÈëµ¥´ÊµÄ¶Ô´íºÍÔÚ¿ØÖÆÌ¨´òÓ¡³öµ¥´ÊÐÅÏ¢;
+void EnglishTyping::JudgeTorF()
 {
-	cout << mWordList[nowIndex].chinese.toLocal8Bit().toStdString() << endl;//»Ø³µºóÏÔÊ¾Õâ¸ö´ÊµÄÓ¢Óï,ººÓï;
+	//cout << mWordList[nowIndex].chinese.toLocal8Bit().toStdString() << endl;//»Ø³µºóÏÔÊ¾Õâ¸ö´ÊµÄÓ¢Óï,ººÓï;
 	int wrongIndex = -1;//ÅÐ¶ÏÊÇ·ñÓÐ´íÎóµÄ´ÊÓï;
 	editText = ui.english_sr->text();//µÃµ½ÊäÈë¿òÄÚµÄÓ¢ÎÄ;
 	if (editText == mWordList[nowIndex].mWord){//ÅÐ¶Ïµ¥´ÊÐ´µÄÊÇ·ñÕýÈ·²¢¶Á³ö¶ÔµÄµ¥´Ê;
 		ui.tips->setText("Right");
-		//ui.tips->setStyleSheet("color:rgb(0, 170, 0);font: 18pt \"Î¢ÈíÑÅºÚ\";");
 		ui.tips->setStyleSheet("color: rgb(0, 170, 0);font: 18pt Microsoft YaHei;");
-
 		ui.label->hide();
 		mWordList[nowIndex].rightn++;
-		if (isUseQtSpeech){
-			qtSpeek(mWordList[nowIndex].mWord);
-		}
-		else{
-			if (mport.size() == 0)
-				QtConcurrent::run(this, &EnglishTyping::readThisWord, nowIndex);
-			else{
-				socket_read(nowIndex);
-			}
-		}
+		qtSpeek(mWordList[nowIndex].mWord);
 	}
 	else{
 		ui.tips->setText("Wrong");
@@ -235,18 +218,9 @@ void EnglishTyping::saveEditInfo()
 		}
 		mWordList[nowIndex].wrongn++;
 		wrongIndex = nowIndex;
-		if (isUseQtSpeech){
-			qtSpeek(mWordList[nowIndex].mWord);
-		}
-		else{
-			if (mport.size() == 0)
-				QtConcurrent::run(this, &EnglishTyping::readThisWord, nowIndex);
-			else{
-				socket_read(nowIndex);
-			}
-		}
+		qtSpeek(mWordList[nowIndex].mWord);
 	}
-	qDebug() << mWordList[nowIndex].mWord << ", You write right " << mWordList[nowIndex].rightn << " wrong " << mWordList[nowIndex].wrongn;
+	cout << mWordList[nowIndex].mWord.toStdString() << ", right " << mWordList[nowIndex].rightn << " wrong " << mWordList[nowIndex].wrongn << endl;
 	qDebug() << "-----------------------------------------";
 	nowIndex++;
 	if (wrongIndex != -1){
@@ -256,7 +230,7 @@ void EnglishTyping::saveEditInfo()
 		nowIndex = 0;
 	}
 	//qDebug() << "nowindex " << nowIndex;
-	moXie001();
+	showChineseLabel();
 }
 
 void EnglishTyping::parsingJson(QNetworkReply * reply)
@@ -268,8 +242,9 @@ void EnglishTyping::parsingJson(QNetworkReply * reply)
 		//qDebug() << re;
 		QString res = unicodeToUtf8(re);    //unicode×ªutf8
 		tempChineseLabel = res;
-		qDebug() << ": " << res;
-		//qDebug() << tempChineseLabel << " tempch";
+		//qDebug() << ": " << res;
+		mWordList[nowIndex].chinese = res;
+		cout << mWordList[nowIndex].chinese.toLocal8Bit().toStdString() << "  ";
 		ui.lb_chinese->setText(tempChineseLabel);
 	}
 	else{
@@ -280,7 +255,6 @@ void EnglishTyping::parsingJson(QNetworkReply * reply)
 void EnglishTyping::timeupdate()
 {
 	mtimeRecorder = mtimeRecorder.addSecs(1);
-	//right_time_label.setText(mtimeRecorder.toString("hh:mm:ss"));
 	right_time_label.setText(mtimeRecorder.toString("hh:mm:ss"));
 }
 
@@ -327,16 +301,6 @@ QString EnglishTyping::myregex(const QString &qstr){   //ÕýÔò½âÎöº¯Êý£¬ÕâÀï¾Í²»½
 	return QString::fromStdString(ans);
 }
 
-void EnglishTyping::readThisWord(int index)
-{
-	QString english_word = mWordList[index].mWord;
-	QString command = pythonPath + " " + pyPath + " " + english_word;
-	QByteArray ba_command = command.toLocal8Bit(); // must
-	char *ch_command = ba_command.data();
-	//cout << ch_command << endl;
-	//system(ch_command);
-	exe_cmd(ch_command);
-}
 
 QString EnglishTyping::unicodeToUtf8(QString str) //unicode×ªutf8
 {
@@ -370,21 +334,6 @@ QString EnglishTyping::unicodeToUtf8(QString str) //unicode×ªutf8
 	return str;
 }
 
-string EnglishTyping::exe_cmd(const char *cmd)
-{
-	char buffer[128] = { 0 };
-	string result;
-	FILE *pipe = _popen(cmd, "r");
-	if (!pipe) throw std::runtime_error("_popen() failed!");
-	while (!feof(pipe))
-	{
-		if (fgets(buffer, 128, pipe) != NULL)
-			result += buffer;
-	}
-	_pclose(pipe);
-	return result;
-}
-
 void EnglishTyping::mtransWay(QString eworld)
 {
 	//English word to chinese;
@@ -395,78 +344,58 @@ void EnglishTyping::mtransWay(QString eworld)
 	manager->get(request);
 }
 
-void EnglishTyping::socket_read(int index)
-{
-	//cout << "½ø³ÌÍ¨Ñ¶" << endl;
-	QString english_word = mWordList[index].mWord;
-	std::string res = english_word.toLocal8Bit().toStdString();
-	//cout << res << endl;
-	char *buff = const_cast<char *>(res.c_str());
-	m_tcpClient->close();
-	delete(m_tcpClient);
-	m_tcpClient = new QTcpSocket(this);
-	m_tcpClient->connectToHost(QHostAddress("127.0.0.1"), 12345);
-	m_tcpClient->write(buff);
-	//QApplication::processEvents();
-}
-
 void EnglishTyping::printLog()
 {
-	if (isSpellOnce()){
-		double cost_time = mtime.elapsed() / 1000.0;
-		UtilsFiles filetools;
-		QString logPath = filetools.getApplicationPath() + "/log";
-		if (!filetools.dirExists(logPath)){
-			filetools.mkPath(logPath);
-		}
-		QDateTime current_date_time = QDateTime::currentDateTime();
-		QString current_time_str = current_date_time.toString("yyyy-MM-dd hh-mm-ss");
-		QString log_name = logPath + "/" + showFileName.text() + ".txt";
-		if (!filetools.fileExists(log_name)){
-			QFile mfile(log_name);
-			if (!mfile.open(QIODevice::Append | QIODevice::Text)){
-				return;
-			}
-			QTextStream out(&mfile);
-			out << current_time_str << "    ";
-			if (cost_time > 60){
-				double ss = int(cost_time) % 60;
-				double mm = cost_time / 60;
-				//out << "cost_time: " << int(mm) << "m" << ss << "s" << endl;
-				out << mtimeRecorder.toString("hh:mm:ss") << endl;
-			}
-			else{
-				//out << "cost_time: " << int(cost_time) << "s" << endl;
-				out << mtimeRecorder.toString("hh:mm:ss") << endl;
-			}
-			for (int i = 0; i < mWordList.size(); i++)
-			{
-				out << i + 1 << ", " << mWordList[i].mWord << " , " << mWordList[i].rightn << "," << mWordList[i].wrongn << "            , " << mWordList[i].chinese << endl;
-			}
-			mfile.close();
-		}
-		else{
-			QFile mfile(log_name);
-			if (!mfile.open(QIODevice::Append | QIODevice::Text)){
-				return;
-			}
-			QTextStream out(&mfile);
-			out << current_time_str << "    ";
-			if (cost_time > 60){
-				double ss = int(cost_time) % 60;
-				double mm = cost_time / 60;
-				out << "cost_time: " << int(mm) << "m" << ss << "s" << endl;
-			}
-			else{
-				out << "cost_time: " << int(cost_time) << "s" << endl;
-			}
-			for (int i = 0; i < mWordList.size(); i++)
-			{
-				out << i + 1 << ", " << mWordList[i].mWord << " , " << mWordList[i].rightn << "," << mWordList[i].wrongn << "            , " << mWordList[i].chinese << endl;
-			}
-			mfile.close();
-		}
+	double cost_time = mtime.elapsed() / 1000.0;
+	UtilsFiles filetools;
+	QString logPath = filetools.getApplicationPath() + "/log";
+	if (!filetools.dirExists(logPath)){
+		filetools.mkPath(logPath);
 	}
+	//µÃµ½½áÊøÊ±¼ä;
+	QDateTime current_date_time = QDateTime::currentDateTime();
+	QString current_time_str = current_date_time.toString("yyyy-MM-dd hh-mm-ss");
+	QString log_name = logPath + "/" + "all_word" + ".txt";
+	QString record_file_path = logPath + "/" + "RecordFile" + ".txt";
+	//´©¼þ¼ÇÂ¼ÎÄ¼þ;
+	QFile mRecordFile(record_file_path);
+	if (!mRecordFile.open(QIODevice::Append | QIODevice::Text)){
+		return;
+	}
+	QTextStream out2(&mRecordFile);
+	out2 << current_time_str << "    ";
+	if (cost_time > 60){
+		double ss = int(cost_time) % 60;
+		double mm = cost_time / 60;
+		out2 << mtimeRecorder.toString("hh:mm:ss");
+	}
+	else{
+		out2 << mtimeRecorder.toString("hh:mm:ss");
+	}
+	out2 << "  " << showFileName.text() << endl;
+	mRecordFile.close();
+	//´´½¨logµ¥´ÊÎÄ¼þ;
+	QFile mfile(log_name);
+	if (!mfile.open(QIODevice::Append | QIODevice::Text)){
+		return;
+	}
+	QTextStream out(&mfile);
+	out << current_time_str << "    ";
+	if (cost_time > 60){
+		double ss = int(cost_time) % 60;
+		double mm = cost_time / 60;
+		out << mtimeRecorder.toString("hh:mm:ss") << endl;
+	}
+	else{
+		out << mtimeRecorder.toString("hh:mm:ss") << endl;
+	}
+	for (int i = 0; i < mWordList.size(); i++)
+	{
+		out << i + 1 << ", " << mWordList[i].mWord << " , " << mWordList[i].rightn << "," << mWordList[i].wrongn << "            , " << mWordList[i].chinese << endl;
+	}
+	mfile.close();
+
+
 }
 
 void EnglishTyping::qtSpeek(QString mtext)
@@ -475,15 +404,6 @@ void EnglishTyping::qtSpeek(QString mtext)
 	{
 		tts->say(mtext);
 	}
-}
-
-bool EnglishTyping::isSpellOnce()
-{
-	for (int i = 0; i < mWordList.size(); i++){
-		if (mWordList[i].rightn == 0)
-			return false;
-	}
-	return true;
 }
 
 void EnglishTyping::writeDefautPathIni()
