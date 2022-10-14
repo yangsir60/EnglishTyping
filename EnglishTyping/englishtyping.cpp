@@ -357,6 +357,7 @@ void EnglishTyping::printLog()
 	QString current_time_str = current_date_time.toString("yyyy-MM-dd hh-mm-ss");
 	QString log_name = logPath + "/" + "all_word" + ".txt";
 	QString record_file_path = logPath + "/" + "RecordFile" + ".txt";
+	QString testQt_path = logPath + "/" + "qttest" + ".txt";
 	//穿件记录文件;
 	QFile mRecordFile(record_file_path);
 	if (!mRecordFile.open(QIODevice::Append | QIODevice::Text)){
@@ -374,6 +375,34 @@ void EnglishTyping::printLog()
 	}
 	out2 << "  " << showFileName.text() << endl;
 	mRecordFile.close();
+	//读取all_world文件;
+	QFile testQt(log_name);
+	if (!testQt.open(QIODevice::ReadOnly | QIODevice::Text)){
+		qDebug() << "testqt File open failed";
+	}
+	QTextStream testIn(&testQt);
+	QVector<QString> read_list;
+	while (!testIn.atEnd())
+	{
+		QString line = testIn.readLine();
+		read_list.append(line);
+	}
+	testQt.close();
+	//读取all_world后写一个测试；
+	QFile test_write(testQt_path);
+	if (!test_write.open(QIODevice::WriteOnly | QIODevice::Text)){
+		qDebug() << "File open failed";
+	}
+	QTextStream out3(&test_write);
+	for (int i = 0; i < read_list.size();i++)
+	{
+		if (i == read_list.size() - 1){
+			read_list[i] = QString::fromLocal8Bit("修改ok");
+		}
+		out3 << read_list[i] << endl;
+	}
+	test_write.close();
+
 	//创建log单词文件;
 	QFile mfile(log_name);
 	if (!mfile.open(QIODevice::Append | QIODevice::Text)){
