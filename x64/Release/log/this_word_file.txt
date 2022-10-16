@@ -1,0 +1,16 @@
+2022-10-16 22-30-48    00:00:03
+1,employee,受雇者,1,0
+2,existence,existence n.存在；生存、生活（方式,0,0
+3,innovation,innovation n.新方法、新事物；革新,0,0
+4,interview,interview n./v.接见、会见；面试；采访,0,0
+5,involve,involve vt.使卷入、使参与；包含、牵涉,0,0
+6,journal,journal n.定期刊物；日志,0,0
+7,link,link v.连接、联系 n.环节、联系、纽带,0,0
+8,manifest,manifest adj.明显的 vt.使显现；证明,0,0
+9,motion,motion n.运动；手势、眼色；提议 v.（向…打手势、示意,0,0
+10,obvious,obvious adj.显然的、明显的,0,0
+11,performance,performance n.执行；表演,0,0
+12,policy,policy n.政策、方针；保险单,0,0
+13,possibility,possibility n.可能（性；可能的事,0,0
+14,pressure,pressure n.压（力；压迫 vt.对…施加压力（或影响,0,0
+15,property,property n.财产、资产；性质、特性,0,0

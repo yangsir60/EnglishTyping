@@ -16,7 +16,16 @@
 class EnglishTyping : public QMainWindow
 {
 	Q_OBJECT
-
+private:
+	Ui::EnglishTypingClass ui;
+	struct temp_word_Struct
+	{
+		int index;
+		QString word;
+		QString chinese;
+		int right_count;
+		int wrong_count;
+	};
 public:
 	EnglishTyping(QWidget *parent = 0);
 	~EnglishTyping();
@@ -61,8 +70,8 @@ public:
 	void buildConnectWay();
 	void showChineseLabel();//¿ªÆô001Ä¬Ð´·½·¨;
 	void initWordList();
-private:
-	Ui::EnglishTypingClass ui;
+	temp_word_Struct getStringLineInformation(QString line);
+
 
 public slots:
 	void chooseFileWay_M();

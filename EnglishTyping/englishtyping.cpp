@@ -161,6 +161,35 @@ void EnglishTyping::initWordList()
 	showChineseLabel();
 }
 
+EnglishTyping::temp_word_Struct EnglishTyping::getStringLineInformation(QString line)
+{
+	QStringList qStrlist =  line.split(",");
+	temp_word_Struct word_struct;
+	qDebug() << line << endl;
+	for (int i = 0; i < qStrlist.size();i++)
+	{
+		QString temp_str = qStrlist[i];
+		if (i == 0){
+			word_struct.index = temp_str.toInt();
+		}
+		if (i == 1){
+			word_struct.word = temp_str;
+		}
+		if (i == 2){
+			word_struct.chinese = temp_str.toLocal8Bit();
+			cout << "---" << endl;
+			qDebug() << word_struct.chinese << endl;
+		}
+		if (i == 3){
+			word_struct.right_count = temp_str.toInt();
+		}
+		if (i == 4){
+			word_struct.wrong_count = temp_str.toInt();
+		}
+	}
+	return word_struct;
+}
+
 QString EnglishTyping::JsonToQstring(QJsonObject jsonObject)
 {
 	QJsonDocument document;
@@ -355,10 +384,30 @@ void EnglishTyping::printLog()
 	//得到结束时间;
 	QDateTime current_date_time = QDateTime::currentDateTime();
 	QString current_time_str = current_date_time.toString("yyyy-MM-dd hh-mm-ss");
-	QString log_name = logPath + "/" + "all_word" + ".txt";
+	QString log_name = logPath + "/" + "this_word_file" + ".txt";
 	QString record_file_path = logPath + "/" + "RecordFile" + ".txt";
-	QString testQt_path = logPath + "/" + "qttest" + ".txt";
-	//穿件记录文件;
+	QString all_word_file_path = logPath + "/" + "all_word_record" + ".txt";
+	//创建log单词文件//把这次打完得到的单词情况记录下来（all_word）；作为这次打完后的原始样本;
+	QFile mfile(log_name);
+	if (!mfile.open(QIODevice::WriteOnly | QIODevice::Text)){
+		return;
+	}
+	QTextStream out(&mfile);
+	out << current_time_str << "    ";
+	if (cost_time > 60){
+		double ss = int(cost_time) % 60;
+		double mm = cost_time / 60;
+		out << mtimeRecorder.toString("hh:mm:ss") << endl;
+	}
+	else{
+		out << mtimeRecorder.toString("hh:mm:ss") << endl;
+	}
+	for (int i = 0; i < mWordList.size(); i++)
+	{
+		out << i + 1 << "," << mWordList[i].mWord << "," << mWordList[i].chinese << "," << mWordList[i].wrongn << "," << mWordList[i].rightn << endl;
+	}
+	mfile.close();
+	//创建记录文件(ReccordFile),记录每次的时间与文件;
 	QFile mRecordFile(record_file_path);
 	if (!mRecordFile.open(QIODevice::Append | QIODevice::Text)){
 		return;
@@ -375,54 +424,58 @@ void EnglishTyping::printLog()
 	}
 	out2 << "  " << showFileName.text() << endl;
 	mRecordFile.close();
-	//读取all_world文件;
-	QFile testQt(log_name);
+	
+	//读取（all_word_file）的单词文件,得到每一行的数据;
+	QFile testQt(all_word_file_path);
 	if (!testQt.open(QIODevice::ReadOnly | QIODevice::Text)){
 		qDebug() << "testqt File open failed";
 	}
 	QTextStream testIn(&testQt);
 	QVector<QString> read_list;
+	QVector<temp_word_Struct> all_word_list;
 	while (!testIn.atEnd())
 	{
 		QString line = testIn.readLine();
+		temp_word_Struct temp_word = getStringLineInformation(line);
+		all_word_list.append(temp_word);
 		read_list.append(line);
 	}
 	testQt.close();
-	//读取all_world后写一个测试；
-	QFile test_write(testQt_path);
+	//mWordList这次单词文件一个个循环一遍，循环这次的单词文件来与总单词文件进行比对;
+	for (int i = 0; i < mWordList.size(); i++)
+	{
+		int flag = 1;
+		for (int j = 0; j < read_list.size(); j++){
+			if (mWordList[i].mWord == all_word_list[j].word){
+				flag = 0;
+				all_word_list[j].right_count = all_word_list[j].right_count + mWordList[i].rightn;
+				all_word_list[j].wrong_count = all_word_list[j].wrong_count + mWordList[i].wrongn;
+				break;
+			}
+		}
+		if (flag == 1){
+			temp_word_Struct temp_word;
+			temp_word.index = all_word_list[all_word_list.size() - 1].index + 1;
+			temp_word.word = mWordList[i].mWord;
+			temp_word.chinese = mWordList[i].chinese;
+			temp_word.right_count = mWordList[i].rightn;
+			temp_word.wrong_count = mWordList[i].wrongn;
+			all_word_list.append(temp_word);
+		}
+	}
+	//读取（this_word）后写如总单词文件（all_word）；
+	QFile test_write(all_word_file_path);
 	if (!test_write.open(QIODevice::WriteOnly | QIODevice::Text)){
 		qDebug() << "File open failed";
 	}
 	QTextStream out3(&test_write);
-	for (int i = 0; i < read_list.size();i++)
+	for (int i = 0; i < all_word_list.size(); i++)
 	{
-		if (i == read_list.size() - 1){
-			read_list[i] = QString::fromLocal8Bit("修改ok");
-		}
-		out3 << read_list[i] << endl;
+		out3 << all_word_list[i].index<<","<<all_word_list[i].word<<","<<all_word_list[i].chinese<<","<<all_word_list[i].right_count<<","<<all_word_list[i].wrong_count << endl;
 	}
 	test_write.close();
 
-	//创建log单词文件;
-	QFile mfile(log_name);
-	if (!mfile.open(QIODevice::Append | QIODevice::Text)){
-		return;
-	}
-	QTextStream out(&mfile);
-	out << current_time_str << "    ";
-	if (cost_time > 60){
-		double ss = int(cost_time) % 60;
-		double mm = cost_time / 60;
-		out << mtimeRecorder.toString("hh:mm:ss") << endl;
-	}
-	else{
-		out << mtimeRecorder.toString("hh:mm:ss") << endl;
-	}
-	for (int i = 0; i < mWordList.size(); i++)
-	{
-		out << i + 1 << ", " << mWordList[i].mWord << " , " << mWordList[i].rightn << "," << mWordList[i].wrongn << "            , " << mWordList[i].chinese << endl;
-	}
-	mfile.close();
+	
 
 
 }
