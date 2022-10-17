@@ -1,15 +1,26 @@
-1,employee,å—é›‡è€0,1,1
-2,existence,å­˜åœ¨,0,0
-3,innovation,innovation n.æ–°æ–¹æ³•ã€æ–°äº‹ç‰©ï¼›é©æ–0,0,0
-4,interview,interview n./v.æŽ¥è§ã€ä¼šè§ï¼›é¢è¯•ï¼›é‡‡è®0,0,0
-5,involve,involve vt.ä½¿å·å…¥ã€ä½¿å‚ä¸Žï¼›åŒ…å«ã€ç‰µæ¶0,0,0
-6,journal,journal n.å®šæœŸåˆŠç‰©ï¼›æ—¥å¿0,0,0
-7,link,link v.è¿žæŽ¥ã€è”ç³n.çŽ¯èŠ‚ã€è”ç³»ã€çº½å¸0,0,0
-8,manifest,manifest adj.æ˜Žæ˜¾çšvt.ä½¿æ˜¾çŽ°ï¼›è¯æ˜Ž,0,0
-9,motion,motion n.è¿åŠ¨ï¼›æ‰‹åŠ¿ã€çœ¼è‰²ï¼›æè®® v.ï¼ˆå‘â€¦æ‰“æ‰‹åŠ¿ã€ç¤ºæ„0,0,0
-10,obvious,obvious adj.æ˜¾ç„¶çš„ã€æ˜Žæ˜¾çš„,0,0
-11,performance,performance n.æ‰§è¡Œï¼›è¡¨æ¼0,0,0
-12,policy,policy n.æ”¿ç­–ã€æ–¹é’ˆï¼›ä¿é™©å0,0,0
-13,possibility,possibility n.å¯èƒ½ï¼ˆæ€§ï¼›å¯èƒ½çš„äº‹,0,0
-14,pressure,pressure n.åŽ‹ï¼ˆåŠ›ï¼›åŽ‹è¿« vt.å¯¹â€¦æ–½åŠ åŽ‹åŠ›ï¼ˆæˆ–å½±å“0,0,0
-15,property,property n.è´¢äº§ã€èµ„äº§ï¼›æ€§è´¨ã€ç‰¹æ€0,0,0
+1,employee,ÊÜ¹ÍÕß,1,2
+2,existence,´æÔÚ,0,0
+3,innovation,innovation n.ÐÂ·½·¨¡¢ÐÂÊÂÎï£»¸ïÐÂ,0,0
+4,interview,interview n./v.½Ó¼û¡¢»á¼û£»ÃæÊÔ£»²É·Ã,0,0
+5,involve,involve vt.Ê¹¾íÈë¡¢Ê¹²ÎÓë£»°üº¬¡¢Ç£Éæ,0,0
+6,journal,journal n.¶¨ÆÚ¿¯Îï£»ÈÕÖ¾,0,0
+7,link,link v.Á¬½Ó¡¢ÁªÏµ n.»·½Ú¡¢ÁªÏµ¡¢Å¦´ø,0,0
+8,manifest,manifest adj.Ã÷ÏÔµÄ vt.Ê¹ÏÔÏÖ£»Ö¤Ã÷,0,0
+9,motion,motion n.ÔË¶¯£»ÊÖÊÆ¡¢ÑÛÉ«£»ÌáÒé v.£¨Ïò¡­´òÊÖÊÆ¡¢Ê¾Òâ,0,0
+10,obvious,obvious adj.ÏÔÈ»µÄ¡¢Ã÷ÏÔµÄ,0,0
+11,performance,performance n.Ö´ÐÐ£»±íÑÝ,0,0
+12,policy,policy n.Õþ²ß¡¢·½Õë£»±£ÏÕµ¥,0,0
+13,possibility,possibility n.¿ÉÄÜ£¨ÐÔ£»¿ÉÄÜµÄÊÂ,0,0
+14,pressure,pressure n.Ñ¹£¨Á¦£»Ñ¹ÆÈ vt.¶Ô¡­Ê©¼ÓÑ¹Á¦£¨»òÓ°Ïì,0,0
+15,property,property n.²Æ²ú¡¢×Ê²ú£»ÐÔÖÊ¡¢ÌØÐÔ,0,0
+16,a range of,Ò»ÏµÁÐ,2,0
+17,ancestor,×æ×Ú,1,0
+18,bad taste,Î¶µÀ²»ºÃ,1,0
+19,breakthrough,ÖØ´ó½øÕ¹,1,1
+20,inferior,½Ï²îµÄ,1,0
+21,kill off,¶óÉ±,0,0
+22,market cycle,ÊÐ³¡ÖÜÆÚ,0,0
+23,outlive,±È,0,0
+24,press for,ÒªÇó,0,0
+25,reference,²Î¿¼,0,0
+26,yes,ÊÇµÄ,0,0

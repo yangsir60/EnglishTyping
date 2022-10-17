@@ -176,9 +176,9 @@ EnglishTyping::temp_word_Struct EnglishTyping::getStringLineInformation(QString 
 			word_struct.word = temp_str;
 		}
 		if (i == 2){
-			word_struct.chinese = temp_str.toLocal8Bit();
-			cout << "---" << endl;
-			qDebug() << word_struct.chinese << endl;
+			word_struct.chinese = temp_str;
+			//cout << "---" << endl;
+			//qDebug() << word_struct.chinese << endl;
 		}
 		if (i == 3){
 			word_struct.right_count = temp_str.toInt();
@@ -387,7 +387,7 @@ void EnglishTyping::printLog()
 	QString log_name = logPath + "/" + "this_word_file" + ".txt";
 	QString record_file_path = logPath + "/" + "RecordFile" + ".txt";
 	QString all_word_file_path = logPath + "/" + "all_word_record" + ".txt";
-	//创建log单词文件//把这次打完得到的单词情况记录下来（all_word）；作为这次打完后的原始样本;
+	//创建log单词文件//把这次打完得到的单词情况记录下来（this_word_file）；作为这次打完后的原始样本;
 	QFile mfile(log_name);
 	if (!mfile.open(QIODevice::WriteOnly | QIODevice::Text)){
 		return;
@@ -448,6 +448,7 @@ void EnglishTyping::printLog()
 		for (int j = 0; j < read_list.size(); j++){
 			if (mWordList[i].mWord == all_word_list[j].word){
 				flag = 0;
+				all_word_list[j].chinese = mWordList[i].chinese;
 				all_word_list[j].right_count = all_word_list[j].right_count + mWordList[i].rightn;
 				all_word_list[j].wrong_count = all_word_list[j].wrong_count + mWordList[i].wrongn;
 				break;
@@ -469,9 +470,11 @@ void EnglishTyping::printLog()
 		qDebug() << "File open failed";
 	}
 	QTextStream out3(&test_write);
+	//out.setCodec("utf-8");
 	for (int i = 0; i < all_word_list.size(); i++)
 	{
-		out3 << all_word_list[i].index<<","<<all_word_list[i].word<<","<<all_word_list[i].chinese<<","<<all_word_list[i].right_count<<","<<all_word_list[i].wrong_count << endl;
+		
+		out3 << all_word_list[i].index << "," << all_word_list[i].word << "," << unicodeToUtf8(all_word_list[i].chinese) << "," << all_word_list[i].right_count << "," << all_word_list[i].wrong_count << endl;
 	}
 	test_write.close();
 
