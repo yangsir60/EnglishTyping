@@ -59,6 +59,7 @@ public:
 	Translator translator;
 	QString defautPath;//用来读取一打开时显示的单词;
 	QString file_name_global;
+	int all_world_number = 0;//记录单词个数;
 
 	void writeDefautPathIni();
 	QString unicodeToUtf8(QString);  //unicode转utf-8,用于处理返回数据

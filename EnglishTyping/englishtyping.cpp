@@ -101,9 +101,11 @@ void EnglishTyping::showChineseLabel()
 
 void EnglishTyping::initWordList()
 {
-	//在打开时读取默认路径
+	//在打开时读取默认路径;
 	if (read_01_path.size() == 0){
 		read_01_path = defautPath;
+		QString postfix = read_01_path.split(".")[read_01_path.split(".").length() - 1];
+		judge_read_way = postfix;
 		showFileName.setText(read_01_path.split("/")[read_01_path.split("/").length() - 1]);
 		ui.statusBar->addWidget(&showFileName);
 	}
@@ -140,7 +142,7 @@ void EnglishTyping::initWordList()
 		}
 		QTextStream * out = new QTextStream(&file);//文本流  ;
 		QStringList tempOption = out->readAll().split("\n");//每行以\n区分 ;
-		for (int i = 0; i < tempOption.count() - 1; i++)
+		for (int i = 0; i < tempOption.count(); i++)
 		{
 			QStringList tempbar = tempOption.at(i).split(",");//一行中的单元格以，区分;  
 
@@ -156,6 +158,7 @@ void EnglishTyping::initWordList()
 		file.close();
 	}
 	cout << "这里有 " << mWordList.size() << " 个单词" << endl;
+	all_world_number = mWordList.size();
 	connect(ui.english_sr, SIGNAL(returnPressed()), this, SLOT(JudgeTorF()), Qt::UniqueConnection);
 	//mtimeRecorder.setHMS(0, 0, 0, 0);//每次打开一个文件从0开始计时;
 	showChineseLabel();
@@ -165,7 +168,7 @@ EnglishTyping::temp_word_Struct EnglishTyping::getStringLineInformation(QString 
 {
 	QStringList qStrlist =  line.split(",");
 	temp_word_Struct word_struct;
-	qDebug() << line << endl;
+	//qDebug() << line << endl;
 	for (int i = 0; i < qStrlist.size();i++)
 	{
 		QString temp_str = qStrlist[i];
@@ -249,9 +252,10 @@ void EnglishTyping::JudgeTorF()
 		wrongIndex = nowIndex;
 		qtSpeek(mWordList[nowIndex].mWord);
 	}
-	cout << mWordList[nowIndex].mWord.toStdString() << ", right " << mWordList[nowIndex].rightn << " wrong " << mWordList[nowIndex].wrongn << endl;
-	qDebug() << "-----------------------------------------";
+	cout << mWordList[nowIndex].mWord.toStdString() << ", right " << mWordList[nowIndex].rightn << " wrong " << mWordList[nowIndex].wrongn;
 	nowIndex++;
+	cout << " ," << nowIndex <<"th "<< endl;
+	qDebug() << "-----------------------------------------";
 	if (wrongIndex != -1){
 		nowIndex = wrongIndex;
 	}
