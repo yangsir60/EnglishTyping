@@ -231,7 +231,7 @@ void EnglishTyping::JudgeTorF()
 	//cout << mWordList[nowIndex].chinese.toLocal8Bit().toStdString() << endl;//回车后显示这个词的英语,汉语;
 	int wrongIndex = -1;//判断是否有错误的词语;
 	editText = ui.english_sr->text();//得到输入框内的英文;
-	if (editText == mWordList[nowIndex].mWord){//判断单词写的是否正确并读出对的单词;
+	if (editText.toLower() == mWordList[nowIndex].mWord.toLower()){//判断单词写的是否正确并读出对的单词;
 		ui.tips->setText("Right");
 		ui.tips->setStyleSheet("color: rgb(0, 170, 0);font: 18pt Microsoft YaHei;");
 		ui.label->hide();
