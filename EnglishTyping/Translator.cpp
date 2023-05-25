@@ -43,6 +43,7 @@ QString Translator::GetUrl(){
 	myurl = "http://fanyi-api.baidu.com/api/trans/vip/translate?";
 	//appid = "20220826001320749";  //你的appid
 	from = "auto";
+	string is_dict = "1";//是否显示字典资源，0为显示;
 	to = lan[index];  //选择目标语种
 	time_t myt = time(NULL);  //获取时间戳
 	salt = to_string(myt);
@@ -65,6 +66,8 @@ QString Translator::GetUrl(){
 	myurl.append(from);
 	myurl.append("&to=");
 	myurl.append(to);
+	myurl.append("&dict=");//要求显示字典;
+	myurl.append(is_dict);
 	myurl.append("&appid=");
 	myurl.append(appid);
 	myurl.append("&salt=");
@@ -73,5 +76,6 @@ QString Translator::GetUrl(){
 	myurl.append(sign);
 	//string转Qstring
 	url = QString::fromStdString(myurl);
+	//cout << "url:" << myurl << endl;
 	return url;
 }

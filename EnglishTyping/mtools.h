@@ -11,7 +11,7 @@ public:
 		QByteArray ba = str.toLatin1();
 		const char *ch = ba.data();
 		while (*ch) {
-			if ((*ch >= 'A' && *ch <= 'Z') || (*ch >= 'a' && *ch <= 'z')){
+			if ((*ch >= 'A' && *ch <= 'Z') || (*ch >= 'a' && *ch <= 'z')|| (*ch==' ')){
 
 			}
 			else {

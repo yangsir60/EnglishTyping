@@ -13,6 +13,7 @@
 #include <QTimer>
 #include <Translator.h>
 #include <QTextToSpeech>
+#include <QtMeanDetail.h>
 class EnglishTyping : public QMainWindow
 {
 	Q_OBJECT
@@ -60,6 +61,7 @@ public:
 	QString defautPath;//用来读取一打开时显示的单词;
 	QString file_name_global;
 	int all_world_number = 0;//记录单词个数;
+	QtMeanDetail *mMeanDetail;//详细示意界面;
 
 	void writeDefautPathIni();
 	QString unicodeToUtf8(QString);  //unicode转utf-8,用于处理返回数据
@@ -72,6 +74,8 @@ public:
 	void showChineseLabel();//开启001默写方法;
 	void initWordList();
 	temp_word_Struct getStringLineInformation(QString line);
+	void sendWordtoPython(QString mword);
+	QTcpSocket *m_tcpClient;
 
 
 public slots:
@@ -81,7 +85,9 @@ public slots:
 	void timeupdate();
 	void changeTimeLabelState();
 	void changeTipsState();
+	void showDetailMean();
 	void openIni();
+	void onSubWindowEnterPressed(const QString& text);  // 子窗口回车键按下的槽函数
 
 };
 

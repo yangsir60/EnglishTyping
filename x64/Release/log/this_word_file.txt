@@ -1,12 +1,50 @@
-2022-10-17 09-18-51    00:00:23
-1,a range of,一系列,0,1
-2,ancestor,祖宗,0,1
-3,bad taste,味道不好,0,1
-4,breakthrough,重大进展,1,1
-5,inferior,较差的,0,1
-6,kill off,扼杀,0,0
-7,market cycle,市场周期,0,0
-8,outlive,比,0,0
-9,press for,要求,0,0
-10,reference,参考,0,0
-11,yes,是的,0,0
+2023-05-25 14-20-56    00:00:04
+1,compensate,补偿,0,0
+2,material,材料、物质上的,0,0
+3,in words,口头上的,0,0
+4,customary,习惯,0,0
+5,discard,放弃,0,0
+6,fullfillment,履行、完成,0,0
+7,deny,否认,0,0
+8,impractical,不切实际的,0,0
+9,immoral,不道德的,0,0
+10,pursuit,追求,0,0
+11,greedy,贪婪,0,0
+12,contemptible,可鄙的,0,0
+13,drawn,被画、被表明,0,0
+14,vigorously,坚决的,0,0
+15,enthusiastically,热情的,0,0
+16,momentarily,暂时的,0,0
+17,verbally,口头的,0,0
+18,distinction,杰出、区别,0,0
+19,destiny, 命运,0,0
+20,vitality,活力,0,0
+21,hypocrisy,,0,0
+22,distinction,,0,0
+23,ideal,,0,0
+24,barn,,0,0
+25,European,,0,0
+26,name brand,,0,0
+27,in demand,需求,0,0
+28,acquisitive,贪婪的,0,0
+29,vulgar,粗鲁的,0,0
+30,spectacle,表演,0,0
+31,ample,充足的,0,0
+32,supply,供应,0,0
+33,materialism,唯物主义,0,0
+34,radical,激进的、根本的 ,0,0
+35,radio,收音机,0,0
+36,radius,半径,0,0
+37,enroll,登记、加入,0,0
+38,exception,例外,0,0
+39,exceptional,杰出的,0,0
+40,unimpressive,无印象的,0,0
+41,unattractive, 不吸引人,0,0
+42,impulse, 推动力,0,0
+43,stirring,鼓舞,0,0
+44,profess, 公开的、自称,0,0
+45,profession,专业,0,0
+46,consequence,结果、后果,0,0
+47,earnest,认真的、真挚的,0,0
+48,earn,获得、赚得,0,0
+49,,,0,0

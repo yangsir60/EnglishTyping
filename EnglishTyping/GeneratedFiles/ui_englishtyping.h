@@ -20,7 +20,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QToolBar>
+#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -32,6 +32,12 @@ public:
     QAction *action_json;
     QAction *action;
     QAction *action_2;
+    QAction *action_csv;
+    QAction *action_showtime;
+    QAction *action_hidetime;
+    QAction *actioncloseTips;
+    QAction *actionopenTips;
+    QAction *actionDetialMean;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
@@ -46,19 +52,31 @@ public:
     QMenu *menu;
     QMenu *menu_2;
     QMenu *menu_3;
-    QToolBar *mainToolBar;
+    QStatusBar *statusBar;
 
     void setupUi(QMainWindow *EnglishTypingClass)
     {
         if (EnglishTypingClass->objectName().isEmpty())
             EnglishTypingClass->setObjectName(QStringLiteral("EnglishTypingClass"));
-        EnglishTypingClass->resize(600, 400);
+        EnglishTypingClass->resize(597, 400);
         action_json = new QAction(EnglishTypingClass);
         action_json->setObjectName(QStringLiteral("action_json"));
         action = new QAction(EnglishTypingClass);
         action->setObjectName(QStringLiteral("action"));
         action_2 = new QAction(EnglishTypingClass);
         action_2->setObjectName(QStringLiteral("action_2"));
+        action_csv = new QAction(EnglishTypingClass);
+        action_csv->setObjectName(QStringLiteral("action_csv"));
+        action_showtime = new QAction(EnglishTypingClass);
+        action_showtime->setObjectName(QStringLiteral("action_showtime"));
+        action_hidetime = new QAction(EnglishTypingClass);
+        action_hidetime->setObjectName(QStringLiteral("action_hidetime"));
+        actioncloseTips = new QAction(EnglishTypingClass);
+        actioncloseTips->setObjectName(QStringLiteral("actioncloseTips"));
+        actionopenTips = new QAction(EnglishTypingClass);
+        actionopenTips->setObjectName(QStringLiteral("actionopenTips"));
+        actionDetialMean = new QAction(EnglishTypingClass);
+        actionDetialMean->setObjectName(QStringLiteral("actionDetialMean"));
         centralWidget = new QWidget(EnglishTypingClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout_2 = new QVBoxLayout(centralWidget);
@@ -140,7 +158,7 @@ public:
         EnglishTypingClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EnglishTypingClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 600, 23));
+        menuBar->setGeometry(QRect(0, 0, 597, 26));
         menu = new QMenu(menuBar);
         menu->setObjectName(QStringLiteral("menu"));
         menu_2 = new QMenu(menuBar);
@@ -148,17 +166,22 @@ public:
         menu_3 = new QMenu(menuBar);
         menu_3->setObjectName(QStringLiteral("menu_3"));
         EnglishTypingClass->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(EnglishTypingClass);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        EnglishTypingClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
+        statusBar = new QStatusBar(EnglishTypingClass);
+        statusBar->setObjectName(QStringLiteral("statusBar"));
+        EnglishTypingClass->setStatusBar(statusBar);
 
         menuBar->addAction(menu->menuAction());
         menuBar->addAction(menu_2->menuAction());
         menuBar->addAction(menu_3->menuAction());
         menu->addAction(action_json);
+        menu->addAction(action_csv);
         menu_2->addAction(action);
+        menu_2->addAction(action_showtime);
+        menu_2->addAction(action_hidetime);
+        menu_2->addAction(actioncloseTips);
+        menu_2->addAction(actionopenTips);
+        menu_2->addAction(actionDetialMean);
         menu_3->addAction(action_2);
-        mainToolBar->addSeparator();
 
         retranslateUi(EnglishTypingClass);
 
@@ -171,6 +194,12 @@ public:
         action_json->setText(QApplication::translate("EnglishTypingClass", "\345\257\274\345\205\245json\345\215\225\350\257\215\346\226\207\344\273\266", Q_NULLPTR));
         action->setText(QApplication::translate("EnglishTypingClass", "\351\246\226\351\200\211\351\241\271", Q_NULLPTR));
         action_2->setText(QApplication::translate("EnglishTypingClass", "\345\205\263\344\272\216", Q_NULLPTR));
+        action_csv->setText(QApplication::translate("EnglishTypingClass", "\350\257\273\345\217\226csv\345\215\225\350\257\215\346\226\207\344\273\266", Q_NULLPTR));
+        action_showtime->setText(QApplication::translate("EnglishTypingClass", "\346\230\276\347\244\272\346\227\266\351\227\264", Q_NULLPTR));
+        action_hidetime->setText(QApplication::translate("EnglishTypingClass", "\351\232\220\350\227\217\346\227\266\351\227\264", Q_NULLPTR));
+        actioncloseTips->setText(QApplication::translate("EnglishTypingClass", "closeTips", Q_NULLPTR));
+        actionopenTips->setText(QApplication::translate("EnglishTypingClass", "openTips", Q_NULLPTR));
+        actionDetialMean->setText(QApplication::translate("EnglishTypingClass", "\345\215\225\350\257\215\350\257\246\347\273\206", Q_NULLPTR));
         lb_chinese->setText(QApplication::translate("EnglishTypingClass", "\344\270\255\346\226\207", Q_NULLPTR));
         english_sr->setText(QApplication::translate("EnglishTypingClass", "chinese", Q_NULLPTR));
         tips->setText(QApplication::translate("EnglishTypingClass", "Right", Q_NULLPTR));
