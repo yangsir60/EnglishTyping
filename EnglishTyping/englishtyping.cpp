@@ -202,6 +202,11 @@ void EnglishTyping::initWordList()
 	connect(ui.english_sr, SIGNAL(returnPressed()), this, SLOT(JudgeTorF()), Qt::UniqueConnection);
 	//mtimeRecorder.setHMS(0, 0, 0, 0);//每次打开一个文件从0开始计时;
 	showChineseLabel();
+	bool flg = false;
+	while (flg == false){
+		flg = wordListGroup();
+	}
+	start_choose_group();
 }
 
 //在关闭文件时读写单词时的操作
@@ -254,6 +259,73 @@ void EnglishTyping::sendWordtoPython(QString mword)
 	//qDebug() << "received:" << received_data;
 }
 
+bool EnglishTyping::wordListGroup()
+{
+	cout << "你想将单词分为几组？" << endl;
+	int group_n;
+	cin >> group_n;
+	int word_n = mWordList.size();
+	if (group_n <= 0 || group_n > word_n){
+		cout << "你在逗我？重新选,";
+		return false;
+	}
+	
+	int every_group_n = word_n / group_n;
+	int rest_word_n = word_n - (every_group_n*group_n);//剩下的单词个数；
+	cout << "单词将被分为:" << group_n << "组,每组有" << every_group_n << "个单词,最后还剩" << rest_word_n << "个单词" << endl;
+	
+	for (int i = 0; i < group_n; i++){
+		QVector<MyWord> tp_wordList;
+		for (int j = 0; j < every_group_n; j++){
+			int t_ind = (i*every_group_n) + j;
+			MyWord tp_word = mWordList[t_ind];
+			tp_wordList.append(tp_word);
+		}
+		groupList_word.append(tp_wordList);
+	}
+
+	if (rest_word_n>0){
+		QVector<MyWord> tp_wordList;
+		for (int i = 0; i < rest_word_n;i++)
+		{
+			MyWord tp_word = mWordList[group_n*every_group_n+i];
+			tp_wordList.append(tp_word);
+		}
+		groupList_word.append(tp_wordList);
+	}
+
+	cout << "添加成功,现有" << groupList_word.size() << "组单词" << endl;
+
+	mWorldList_bak = mWordList;//备份初始单词;
+	return true;
+}
+
+bool EnglishTyping::ChooseGroupWord(int ind)
+{
+	ind = ind - 1;
+	if (0 <= ind && ind < groupList_word.size()){
+		mWordList = groupList_word[ind];
+		cout << "第" << ind + 1 << "组开始" << endl;
+		showChineseLabel();
+		return true;
+	}else{
+		cout << "输入组数错误 , 输0~"<<groupList_word.size()<<"额！" << endl;
+		return false;
+	}
+}
+
+void EnglishTyping::start_choose_group()
+{
+	bool flag = false;
+	while (flag==false)
+	{
+		cout << "选择组数" << endl;
+		int ind;
+		cin >> ind;
+		flag = ChooseGroupWord(ind);
+	}
+}
+
 //json文件转为qstring;
 QString EnglishTyping::JsonToQstring(QJsonObject jsonObject)
 {
@@ -294,6 +366,11 @@ void EnglishTyping::JudgeTorF()
 	//cout << mWordList[nowIndex].chinese.toLocal8Bit().toStdString() << endl;//回车后显示这个词的英语,汉语;
 	int wrongIndex = -1;//判断是否有错误的词语;
 	editText = ui.english_sr->text();//得到输入框内的英文;
+	if (editText.toInt()){
+		if (editText.toInt() >= 0 && editText.toInt() <= groupList_word.size()){
+			ChooseGroupWord(editText.toInt());
+		}
+	}
 	if (editText.toLower() == mWordList[nowIndex].mWord.toLower()){//判断单词写的是否正确并读出对的单词;
 		ui.tips->setText("Right");
 		ui.tips->setStyleSheet("color: rgb(0, 170, 0);font: 18pt Microsoft YaHei;");

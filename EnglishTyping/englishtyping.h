@@ -39,6 +39,8 @@ public:
 		int wrongn;
 	};
 	QVector<MyWord> mWordList;
+	QVector<MyWord> mWorldList_bak;
+	QVector<QVector<MyWord>> groupList_word;
 	QString editText;
 	int nowIndex = 0;//ÓÃÀ´Ë÷ÒýmWordList;
 	QString pythonPath;
@@ -76,6 +78,9 @@ public:
 	temp_word_Struct getStringLineInformation(QString line);
 	void sendWordtoPython(QString mword);
 	QTcpSocket *m_tcpClient;
+	bool wordListGroup();
+	bool ChooseGroupWord(int ind);
+	void start_choose_group();
 
 
 public slots:
