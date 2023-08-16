@@ -43,6 +43,8 @@ EnglishTyping::EnglishTyping(QWidget *parent)
 		translator.SetKey(key);
 	}
 	//初始化单词列表;
+	if (isPythonProgramRunning("pyDict01.exe"))
+		mIsPythonProgramRunning = true;
 	initWordList();
 	//开启一个计时器;
 	mtimer = new QTimer(this);
@@ -104,7 +106,8 @@ void EnglishTyping::openIni(){
 void EnglishTyping::onSubWindowEnterPressed(const QString& text)
 {
 	//qDebug() << text;
-	sendWordtoPython(text);
+	if (mIsPythonProgramRunning)
+		sendWordtoPython(text);
 }
 
 //在label上显示下一个单词的显示中文;//并且在控制台也显示中文;
@@ -199,6 +202,7 @@ void EnglishTyping::initWordList()
 		}
 	}
 	all_world_number = mWordList.size();
+	groupList_word.clear();
 	connect(ui.english_sr, SIGNAL(returnPressed()), this, SLOT(JudgeTorF()), Qt::UniqueConnection);
 	//mtimeRecorder.setHMS(0, 0, 0, 0);//每次打开一个文件从0开始计时;
 	showChineseLabel();
@@ -326,6 +330,26 @@ void EnglishTyping::start_choose_group()
 	}
 }
 
+bool EnglishTyping::isPythonProgramRunning(const QString& processName)
+{
+	QString command = "tasklist";
+	QProcess process;
+	process.start(command);
+	process.waitForFinished();
+
+	QByteArray output = process.readAllStandardOutput();
+	QString strOutput = QString::fromLocal8Bit(output);
+	QStringList lines = strOutput.split(QRegExp("[\r\n]"), QString::SkipEmptyParts);
+
+	foreach(const QString& line, lines) {
+		if (line.contains(processName)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 //json文件转为qstring;
 QString EnglishTyping::JsonToQstring(QJsonObject jsonObject)
 {
@@ -379,7 +403,8 @@ void EnglishTyping::JudgeTorF()
 		qtSpeek(mWordList[nowIndex].mWord);
 		if (mWordList[nowIndex].mWord.size()>0)
 		{
-			sendWordtoPython(mWordList[nowIndex].mWord.toLower());
+			if (mIsPythonProgramRunning)
+				sendWordtoPython(mWordList[nowIndex].mWord.toLower());
 		}
 		
 	}

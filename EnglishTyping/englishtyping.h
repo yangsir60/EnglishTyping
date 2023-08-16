@@ -81,8 +81,8 @@ public:
 	bool wordListGroup();
 	bool ChooseGroupWord(int ind);
 	void start_choose_group();
-
-
+	bool isPythonProgramRunning(const QString& processName);//检测系统中是否存在某个程序;
+	bool mIsPythonProgramRunning = false;
 public slots:
 	void chooseFileWay_M();
 	void JudgeTorF();
